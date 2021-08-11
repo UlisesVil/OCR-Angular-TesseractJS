@@ -1,10 +1,29 @@
 <div class="wrapper">
-  <ul class="list-file" >
-    <li class="item-file" (click)="clickImage(item)" *ngFor="let item of listImages">
-      <div class="block">
-        <img [src]="'assets/images/'+item.src" alt="" class="input-image">
-        {{item.src}}
-      </div>
-    </li>
-  </ul>
+
+  <form #uploadImgForm="ngForm" (ngSubmit)="onSubmit(uploadImgForm)">
+    <img id="imgPrevSave" alt="">
+    <div class="inputCont">
+      <input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
+      <input type="submit" value="guardar" [disabled]="!uploadImgForm.form.valid">
+    </div>
+  </form>
+
+  <div class="savedImages">
+    <p>Seleciona una Imagen para Procesarla</p>
+    <ul class="list-file" >
+      <li class="item-file" (click)="clickImage(item)" *ngFor="let item of listImages">
+        <div class="block">
+          <img [src]="'assets/images/'+item.src" alt="" class="input-image">
+          {{item.src}}
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+<app-side-bar></app-side-bar>
+<app-output-text></app-output-text>
+
+
 </div>

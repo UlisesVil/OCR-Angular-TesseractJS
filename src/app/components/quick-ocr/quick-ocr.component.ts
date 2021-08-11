@@ -3,11 +3,11 @@ import { recognize } from 'tesseract.js';
 import { OcrService } from '../../services/Ocr.service';
 
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  selector: 'app-quick-ocr',
+  templateUrl: './quick-ocr.component.html',
+  styleUrls: ['./quick-ocr.component.scss']
 })
-export class SideBarComponent implements OnInit, OnDestroy{
+export class QuickOcrComponent implements OnInit, OnDestroy{
   @ViewChild('inputImage') inputImage: ElementRef;
   @ViewChild('outputImage') outputImage: ElementRef;
   public openSideBar:boolean = false;
@@ -19,6 +19,9 @@ export class SideBarComponent implements OnInit, OnDestroy{
   public loadingPercentage: number;
   public statusProcess:string;
   public loadedSrc:any;
+  public showBlock:boolean;
+  public imageFileName:any;
+  public confidence: number;
 
   constructor(
     private ocrService: OcrService
@@ -26,6 +29,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.listObserver();
+    this.showBlock=false;
   }
 
   toggleMenu = () =>{
@@ -95,6 +99,9 @@ export class SideBarComponent implements OnInit, OnDestroy{
     console.log('FINALIZO------------->',data);
 
     this.ocrService.cbText.emit(data);
+    this.confidence=data.confidence;
+    console.log(this.confidence);
+
 
   }
 
@@ -111,12 +118,25 @@ export class SideBarComponent implements OnInit, OnDestroy{
 
   changeFunc= (e) =>{
     console.log(e);
+    this.showBlock=true;
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
 
+    var fileName=e.target.files[0].name;
+
+    if(fileName.length<14){
+      this.imageFileName=e.target.files[0].name;
+    }else{
+      let arrStr=fileName.split('');
+      let newName=arrStr.slice(0,10).join('');
+      let indexExt= arrStr.indexOf('.');
+      let ext=arrStr.slice(indexExt,arrStr.length).join('');
+      this.imageFileName=newName+'..'+ext;
+    }
+
     reader.onload=function(){
       //let preview = document.getElementById('preview');
-      let imagePrev= document.getElementById('imgPrev');
+      let imagePrev= document.getElementById('imgPrevQuick');
       let imageSrc:any=reader.result;
       imagePrev.setAttribute('src', imageSrc);
       console.log(reader.result);
@@ -125,9 +145,6 @@ export class SideBarComponent implements OnInit, OnDestroy{
       //preview.append(imagePrev);
     };
 
-
-
   }
-
 
 }

@@ -1,7 +1,11 @@
 <ng-container *ngTemplateOutlet="loadingTpl"></ng-container>
 
 
+
 <div class="wrapper" [style.width]="(openSideBar)? '50%':'3%'">
+
+  <input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
+
   <div class="wrapper-btn">
     <button (click)="toggleMenu()" ><i class="uil uil-angle-double-left"></i></button>
   </div>
@@ -10,18 +14,19 @@
     <div class="in-wrapper">
       <ng-container *ngIf="true">
         <canvas #outputImage class="canvas-overlay"></canvas>
-        <img (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+this.image" alt="">
+        <img id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src='assets/images/{{image}}' alt="">
+        <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
       </ng-container>
     </div>
-    <div class="in-wrapper">
-      Texto
+    <div *ngIf="image" class="in-wrapper">
+      {{image}}
     </div>
   </div>
 </div>
 
 
 <ng-template #loadingTpl>
-  <div class="loading" *ngIf="loadingPercentage < 100  && loadingPercentage > 0">
+  <div class="loading" *ngIf="loadingPercentage < 100  && loadingPercentage > 10 && statusProcess==='recognizing text'" >
     <div class="in">
       Analizando el texto de la imagen {{loadingPercentage | number: '1.2-2'}}%...
       <img class="loadingGif" src="https://i.gifer.com/WMDx.gif" alt="">

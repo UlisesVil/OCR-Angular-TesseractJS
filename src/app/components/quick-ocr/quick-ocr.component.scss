@@ -1,0 +1,126 @@
+.wrapper{
+  //background-color: whitesmoke;
+  width: 100%;
+  transition: all ease 200ms;
+  padding: 40px 0;
+
+  .conf{
+    width: fit-content;
+    margin: 10px auto;
+
+  }
+
+  input[type=file]#inputfileup {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  label[for="inputfileup"] {
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #106BA0;
+    display: block;
+    transition: all .5s;
+    cursor: pointer;
+    padding: 15px !important;
+    width: fit-content;
+    text-align: center;
+    border-radius: 5px;
+    margin: 0px auto;
+
+    .indicador{
+      display: block;
+      overflow: hidden;
+      width: 150px;
+      max-width: 200px;
+      margin: 0px auto;
+    }
+  }
+
+
+  .wrapper-sections{
+    //border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+
+    .in-wrapper{
+      //border:1px solid greenyellow;
+      width: 50%;
+
+
+      .canvas-overlay{
+        position: absolute;
+        width: 50%;
+        //background-color: rgba(201, 201, 201, 0.623);
+      }
+
+      .input-image{
+        width: 100%;
+        border-radius: 5px;
+        box-shadow:
+          0 1.3px 7.5px -10px rgba(0, 0, 0, 0.085),
+          0 10px 60px -10px rgba(0, 0, 0, 0.17)
+        ;
+      }
+    }
+
+    .textResult{
+      width: 40%;
+    }
+  }
+
+  .noImage{
+    //border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20vh;
+
+
+    .uploadGif{
+      width: 150px;
+      display: block;
+    }
+    p{
+      line-height: 0px;
+    }
+  }
+
+}
+
+.loading{
+  position: fixed;
+  z-index: 3;
+  background-color: rgba(0, 0, 0, 0.767);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  .in{
+    text-align: center;
+    padding: 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    color: whitesmoke;
+
+    .loadingGif{
+      width: 70px;
+      display: block;
+      margin: 20px auto;
+    }
+  }
+}
+
