@@ -4,9 +4,31 @@
     <img id="imgPrevSave" alt="">
     <div class="inputCont">
       <input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
-      <input type="submit" value="guardar" [disabled]="!uploadImgForm.form.valid">
+
+
+      <input type="text" name="documentName" #documentName="ngModel" [(ngModel)]="ocrImageModel.documentName" placeholder="Nombre documento" required>
+      <input type="text" name="documentType" #documentType="ngModel" [(ngModel)]="ocrImageModel.documentType" placeholder="Tipo documento" required>
+
+
+      <input type="submit" value="Save" [disabled]="!uploadImgForm.form.valid" required>
     </div>
   </form>
+
+
+
+  <div class="savedImages">
+    <p>Seleciona una Imagen que guardaste para Procesarla</p>
+    <ul class="list-file" >
+      <li class="item-file" (click)="clickImage({src:item.imageName})" *ngFor="let item of savedImages">
+        <div class="block">
+          <img id="imageToLoad" src="{{url+'getOcrImage/'+item.imageName}}" #inputImage *ngIf="item.imageName" alt="" class="input-image" (load)="pasaelLoad($event)">
+         <p>{{item.imageName}}</p>
+         <p>{{item.documentName}}</p>
+         <p>{{item.documentType}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 
   <div class="savedImages">
     <p>Seleciona una Imagen para Procesarla</p>
@@ -19,6 +41,9 @@
       </li>
     </ul>
   </div>
+
+
+
 
 
 

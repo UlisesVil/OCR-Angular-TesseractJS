@@ -45,6 +45,7 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
       console.log(src);
       this.image = src;
       this.openSideBar = true;
+      console.log(src);
 
     });
     this.listSubscribers=[observer1$];
@@ -62,6 +63,8 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
   initSetup= () => {
     const canvasElement = this.outputImage.nativeElement;
     const imageElement = this.inputImage.nativeElement;
+    console.log(imageElement);
+
     const { naturalWidth, naturalHeight} = imageElement;
     console.log( naturalWidth, naturalHeight );
     this.context= canvasElement.getContext('2d');

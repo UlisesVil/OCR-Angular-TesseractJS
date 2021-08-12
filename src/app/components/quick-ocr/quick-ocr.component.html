@@ -30,7 +30,7 @@
     <div class="in-wrapper">
       <ng-container *ngIf="true">
         <canvas #outputImage class="canvas-overlay"></canvas>
-        <img id="imgPrevQuick" (load)='loadedImage()' #inputImage class="input-image" src='assets/images/{{image}}' alt="">
+        <img id="imgPrevQuick" (load)='loadedImage()' #inputImage class="input-image" src='' alt="">
         <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
       </ng-container>
       <div *ngIf="image" class="in-wrapper">

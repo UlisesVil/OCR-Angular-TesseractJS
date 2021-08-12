@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { recognize } from 'tesseract.js';
 import { OcrService } from '../../services/Ocr.service';
+import { Global } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -19,6 +20,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
   public loadingPercentage: number;
   public statusProcess:string;
   public loadedSrc:any;
+  public url=Global.url;
 
   constructor(
     private ocrService: OcrService
@@ -58,6 +60,8 @@ export class SideBarComponent implements OnInit, OnDestroy{
   initSetup= () => {
     const canvasElement = this.outputImage.nativeElement;
     const imageElement = this.inputImage.nativeElement;
+    console.log(imageElement);
+
     const { naturalWidth, naturalHeight} = imageElement;
     console.log( naturalWidth, naturalHeight );
     this.context= canvasElement.getContext('2d');

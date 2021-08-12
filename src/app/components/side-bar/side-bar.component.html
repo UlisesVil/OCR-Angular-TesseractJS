@@ -14,7 +14,7 @@
     <div class="in-wrapper">
       <ng-container *ngIf="true">
         <canvas #outputImage class="canvas-overlay"></canvas>
-        <img id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src='assets/images/{{image}}' alt="">
+        <img *ngIf="image" crossorigin="anonymous" id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src="{{url+'getOcrImage/'+image}}" alt=""><!--{{url+'getOcrImage/'+image}}-->
         <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
       </ng-container>
     </div>
