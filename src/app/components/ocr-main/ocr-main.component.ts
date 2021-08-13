@@ -13,23 +13,7 @@ import { Global } from 'src/app/services/global.service';
 export class OcrMainComponent implements OnInit, OnDestroy{
   @ViewChild('inputImage') inputImage: ElementRef;
   @ViewChild('outputImage') outputImage: ElementRef;
-  listImages= [
-    {
-      src:'banner.jpeg'
-    },
-    {
-      src:'eng_bw.png'
-    },
-    {
-      src:'example-1.png'
-    },
-    {
-      src:'invoice.jpeg'
-    },
-    {
-      src:'invoice-2.jpeg'
-    }
-  ];
+
   //loadedSrc:any;
   public imagesToUpload: Array<File>;
   public ocrImageModel: OcrImage;
@@ -63,7 +47,6 @@ export class OcrMainComponent implements OnInit, OnDestroy{
       },
       error=>{
         console.log(<any>error);
-
       }
     );
   }

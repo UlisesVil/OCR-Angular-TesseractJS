@@ -11,6 +11,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { OutputTextComponent } from './components/output-text/output-text.component';
 import { HomeComponent } from './components/home/home.component';
 import { QuickOcrComponent } from './components/quick-ocr/quick-ocr.component';
+import { UserAuthComponent } from './components/user-auth/user-auth.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { QuickOcrComponent } from './components/quick-ocr/quick-ocr.component';
     SideBarComponent,
     OutputTextComponent,
     HomeComponent,
-    QuickOcrComponent
+    QuickOcrComponent,
+    UserAuthComponent
   ],
   imports: [
     BrowserModule,
