@@ -3,14 +3,14 @@
 
 
 <div class="wrapper">
-  <div  *ngIf="confidence" class="conf">
-    <p>
-      El nivel de confianza en el reconocimiento es de {{confidence}} %
-    </p>
-    <!--
-      <p>Recuerda que entre mas nitida sea tu imagen</p>
-      <p>Mayor sera el porcentaje de confianza en el reconocimiento</p>
-    -->
+  <div  class="confidence" *ngIf="confidence">
+      El nivel de confianza en el reconocimiento es de <span [style.color]="confidence < 80? 'red': 'green'">{{confidence}}</span> %
+  </div>
+  <div  class="confidence" *ngIf="confidence>=80">
+    Excelente!!! pudimos reconocer la mayor parte del texto en tu imagen
+  </div>
+  <div  class="confidence" *ngIf="confidence<80">
+    Recuerda que entre mas clara es la imagen mejor el porcentaje de confianza
   </div>
 
   <span class="inputfileup">
@@ -22,35 +22,47 @@
     <div class="indicador" *ngIf="!imageFileName"><span>Subir Imagen</span></div>
   </label>
 
-
-
-
-
-  <div class="wrapper-sections" *ngIf="showBlock">
-    <div class="in-wrapper">
-      <ng-container *ngIf="true">
-        <canvas #outputImage class="canvas-overlay"></canvas>
-        <img id="imgPrevQuick" (load)='loadedImage()' #inputImage class="input-image" src='' alt="">
-        <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
-      </ng-container>
-      <div *ngIf="image" class="in-wrapper">
-        {{image}}
-      </div>
-    </div>
-
-
-    <div class="textResult">
-      <app-output-text></app-output-text>
-    </div>
-
-  </div>
-
   <div class="noImage" *ngIf="!showBlock">
     <img class="uploadGif" src="assets/images/upload.gif" alt="">
     <p>Da click en el boton de arriba</p>
     <p>y selecciona una Imagen para que podamos Procesarla</p>
   </div>
-</div>
+
+  <div class="OCR-container">
+
+
+
+        <div class="wrapper-sections" *ngIf="showBlock">
+          <div class="in-wrapper">
+            <ng-container *ngIf="true">
+              <canvas #outputImage class="canvas-overlay"></canvas>
+              <img id="imgPrevQuick" (load)='loadedImage()' #inputImage class="input-image" src='' alt="">
+              <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
+            </ng-container>
+            <div *ngIf="image" class="in-wrapper">
+              {{image}}
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+        <div class="textResult" *ngIf="showBlock">
+          <app-output-text></app-output-text>
+        </div>
+
+
+      </div>
+  </div>
+
+
+
+
+
+
+
 
 
 <ng-template #loadingTpl>

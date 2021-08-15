@@ -7,11 +7,11 @@ import { OcrService } from 'src/app/services/Ocr.service';
 import { MenusActivatorService } from 'src/app/services/menus-activator.service';
 
 @Component({
-  selector: 'app-user-auth',
-  templateUrl: './user-auth.component.html',
-  styleUrls: ['./user-auth.component.scss']
+  selector: 'app-user-register',
+  templateUrl: './user-register.component.html',
+  styleUrls: ['./user-register.component.scss']
 })
-export class UserAuthComponent implements OnInit, OnDestroy {
+export class UserRegisterComponent implements OnInit, OnDestroy {
   public user:UserAuthModel;
   public confirm:string;
   public passwordWarn:boolean;
@@ -29,13 +29,15 @@ export class UserAuthComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.passwordWarn=false;
+
     this.listObserver();
+
+
   }
 
   ngOnDestroy(): void {
     this.listSubscribers.forEach(element => element.unsubscribe());
   }
-
 
   listObserver=()=>{
     console.log('este es el observer');
@@ -47,19 +49,27 @@ export class UserAuthComponent implements OnInit, OnDestroy {
     this.listSubscribers=[observer1$];
   }
 
-  onSubmitlogin=(form)=>{
+  onSubmit= (form) =>{
     console.log(form);
     console.log(this.confirm);
     console.log(this.user);
     if(this.user.password===this.confirm){
-      this._userService.login(this.user).subscribe(
+      this._userService.saveUser(this.user).subscribe(
         res=>{
           console.log(res);
-          this.cookieService.set('token', res.token);
-          this.cookieService.set('payload', JSON.stringify(res.payload));
-          this._router.navigate(['/ocr-main']).then(()=>{
-            window.location.reload();
-          });
+          this._userService.login(this.user).subscribe(
+            res=>{
+              console.log(res);
+              this.cookieService.set('token', res.token);
+              this.cookieService.set('payload', JSON.stringify(res.payload));
+              this._router.navigate(['/ocr-main']).then(()=>{
+                window.location.reload();
+              });
+            },error=>{
+              console.log(<any>error);
+            }
+          );
+
         },error=>{
           console.log(<any>error);
         }

@@ -2,15 +2,21 @@
 
 
 
-<div class="wrapper" [style.width]="(openSideBar)? '50%':'3%'">
+<div class="wrapper" [style.height]="(openSideBar)? '90%':'0%'" [style.width]="(openSideBar)? '100%':'0%'">
 
-  <input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
+  <!--<input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">-->
 
-  <div class="wrapper-btn">
-    <button (click)="toggleMenu()" ><i class="uil uil-angle-double-left"></i></button>
-  </div>
 
   <div class="wrapper-sections">
+    <div  class="confidence" *ngIf="confidence">
+        El nivel de confianza en el reconocimiento es de <span [style.color]="confidence < 80? 'red': 'green'">{{confidence}}</span> %
+    </div>
+    <div  class="confidence" *ngIf="confidence>=80">
+      Excelente!!! pudimos reconocer la mayor parte del texto en tu imagen
+    </div>
+    <div  class="confidence" *ngIf="confidence<80">
+      Recuerda que entre mas clara es la imagen mejor el porcentaje de confianza
+    </div>
     <div class="in-wrapper">
       <ng-container *ngIf="true">
         <canvas #outputImage class="canvas-overlay"></canvas>
@@ -18,19 +24,23 @@
         <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
       </ng-container>
     </div>
-    <div *ngIf="image" class="in-wrapper">
-      {{image}}
-    </div>
+  </div>
+
+  <div class="textResult">
+    <app-output-text></app-output-text>
   </div>
 
 
-<app-output-text></app-output-text>
-
+</div>
+<div class="wrapper-btn">
+  <button (click)="toggleMenu()" >
+    <i class="uil uil-angle-double-left" *ngIf="openSideBar"></i>
+    <i class="uil uil-angle-double-right" *ngIf="!openSideBar"></i>
+  </button>
 </div>
 
-
 <ng-template #loadingTpl>
-  <div class="loading" *ngIf="loadingPercentage < 100  && loadingPercentage > 10 && statusProcess==='recognizing text'" >
+  <div class="loading" *ngIf="loadingPercentage < 100  && loadingPercentage > 0 && statusProcess==='recognizing text'" >
     <div class="in">
       Analizando el texto de la imagen {{loadingPercentage | number: '1.2-2'}}%...
       <img class="loadingGif" src="https://i.gifer.com/WMDx.gif" alt="">

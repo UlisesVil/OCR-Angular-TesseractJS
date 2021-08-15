@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.interceptor'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,9 @@ import { OutputTextComponent } from './components/output-text/output-text.compon
 import { HomeComponent } from './components/home/home.component';
 import { QuickOcrComponent } from './components/quick-ocr/quick-ocr.component';
 import { UserAuthComponent } from './components/user-auth/user-auth.component';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +27,8 @@ import { UserAuthComponent } from './components/user-auth/user-auth.component';
     OutputTextComponent,
     HomeComponent,
     QuickOcrComponent,
-    UserAuthComponent
+    UserAuthComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,13 @@ import { UserAuthComponent } from './components/user-auth/user-auth.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CookieService,{
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

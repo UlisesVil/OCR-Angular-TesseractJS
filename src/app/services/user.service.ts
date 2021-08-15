@@ -20,7 +20,7 @@ export class UserService {
     return this._http.post(this.url+'save-user',params,{headers:headers});
   }
 
-  getUser=(params):Observable<any>=>{
+  login=(params):Observable<any>=>{
     params=JSON.stringify(params);
     let headers= new HttpHeaders().set('Content-Type','application/json');
     return this._http.post(this.url+'login',params,{headers:headers});

@@ -4,6 +4,7 @@ import { UploadImagesService } from 'src/app/services/upload-images.service';
 import { OcrImage } from 'src/app/models/ocr-image';
 import { RequestsOCRImagesService } from 'src/app/services/requests-ocrimages.service';
 import { Global } from 'src/app/services/global.service';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-ocr-main',
   templateUrl: './ocr-main.component.html',
@@ -19,28 +20,40 @@ export class OcrMainComponent implements OnInit, OnDestroy{
   public ocrImageModel: OcrImage;
   public savedImages:any;
   public url= Global.url;
-
+  private loggedUser:any;
+  public srcLoad:boolean=false;
+  public imageFileName:any;
+  public confidence:number;
 
   constructor(
     private ocrService: OcrService,
     private _uploadImagesService: UploadImagesService,
-    private _requestsOCRImagesService: RequestsOCRImagesService
+    private _requestsOCRImagesService: RequestsOCRImagesService,
+    private _cookieService: CookieService
   ) {
-    this.ocrImageModel= new OcrImage('','','');
+    this.ocrImageModel= new OcrImage('','','','');
+
    }
 
   ngOnInit(): void {
-    this.getImagesData();
+
+    this.loggedUser= JSON.parse(this._cookieService.get('payload'));
+    console.log(this.loggedUser);
+    this.ocrImageModel.userId=this.loggedUser.id;
+    console.log(this.ocrImageModel.userId);
+    this.getImagesData(this.loggedUser.id);
 
 
   }
   ngOnDestroy(): void {
   }
 
-  getImagesData=()=>{
-    this._requestsOCRImagesService.getImagesData().subscribe(
+  getImagesData=(userId)=>{
+    console.log(userId);
+
+    this._requestsOCRImagesService.getImagesData(userId).subscribe(
       response=>{
-        //console.log(response);
+        console.log(response);
         this.savedImages= response.ImagesOCR;
         console.log(this.savedImages);
 
@@ -52,25 +65,16 @@ export class OcrMainComponent implements OnInit, OnDestroy{
   }
 
   clickImage = ( image ) =>{
-    //console.log(image);
-
     this.ocrService.cbImage.emit(image);
-    console.log(image);
-
-
-
-
+    window.scrollTo(0,0);
   }
 
-  pasaelLoad(e){
-    console.log(e);
 
-  }
 
 
   onSubmit=(form)=>{
     //console.log(form);
-    //console.log(this.ocrImageModel);
+    console.log(this.ocrImageModel);
 
     this._requestsOCRImagesService.saveOcrImages(this.ocrImageModel).subscribe(
       response=>{
@@ -82,10 +86,11 @@ export class OcrMainComponent implements OnInit, OnDestroy{
           console.log(result);
 
         });
+        form.reset;
+        window.location.reload();
 
 
 
-        //form.reset;
       },
       error=>{
         console.log(<any>error);
@@ -96,17 +101,36 @@ export class OcrMainComponent implements OnInit, OnDestroy{
 
 
   changeFunc= (e:any) =>{
+    this.srcLoad=true;
     //console.log(e);
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
 
+
+
+    var fileName=e.target.files[0].name;
+
+    if(fileName.length<14){
+      this.imageFileName=e.target.files[0].name;
+    }else{
+      let arrStr=fileName.split('');
+      let newName=arrStr.slice(0,10).join('');
+      let indexExt= arrStr.indexOf('.');
+      let ext=arrStr.slice(indexExt,arrStr.length).join('');
+      this.imageFileName=newName+'..'+ext;
+    }
+
+
+
     //Image Preview
     reader.onload=function(){
       let imagePrev= document.getElementById('imgPrevSave');
-      let imageSrc:any=reader.result;
+      var imageSrc:any=reader.result;
       imagePrev.setAttribute('src', imageSrc);
       //console.log(reader.result);
     };
+
+
 
     //Upload image to server
     this.ocrImageModel.imageName = e.target.files[0].name;
@@ -114,5 +138,8 @@ export class OcrMainComponent implements OnInit, OnDestroy{
     console.log(this.imagesToUpload);
 
   }
+
+
+
 
 }

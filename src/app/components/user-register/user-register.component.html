@@ -1,16 +1,15 @@
 <div class="wrapper">
 
+  <form #registerForm= "ngForm" (ngSubmit)="onSubmit(registerForm)" >
 
-  <form #loginForm= "ngForm" (ngSubmit)="onSubmitlogin(loginForm)" >
-    <div>
-      Aun No estas registrado? da <b [routerLink]="['/signUp']">click aqui!</b>
-    </div>
-
+    <input type="text" name="name" #name="ngModel" [(ngModel)]="user.userName" placeholder="Name" required>
+    <input type="text" name="lastName" #lastName="ngModel" [(ngModel)]="user.lastName" placeholder="Last Name" required>
     <input type="email" name="email" #email="ngModel" [(ngModel)]="user.email" placeholder="E-mail" required>
     <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" placeholder="Password" required>
     <input type="password" name="password2" #password2="ngModel" [(ngModel)]="confirm" placeholder="Confirm Password" required>
     <p class="passWarning" *ngIf="passwordWarn">La contraseña no coincide con la Confirmada</p>
-    <input class="submit" type="submit" value="Login">
+    <input class="submit" type="submit" value="Sign Up">
 
   </form>
+
 </div>

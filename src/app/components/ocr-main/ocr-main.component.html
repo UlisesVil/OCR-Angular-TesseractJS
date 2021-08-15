@@ -1,13 +1,24 @@
-<div class="wrapper">
+<div id="wrapper" class="wrapper">
+
+
 
   <form #uploadImgForm="ngForm" (ngSubmit)="onSubmit(uploadImgForm)">
+    <div id="noImage" *ngIf='!srcLoad'>Sube una Imagen</div>
     <img id="imgPrevSave" alt="">
     <div class="inputCont">
-      <input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
 
 
-      <input type="text" name="documentName" #documentName="ngModel" [(ngModel)]="ocrImageModel.documentName" placeholder="Nombre documento" required>
+
+
+      <input  type="text" name="documentName" #documentName="ngModel" [(ngModel)]="ocrImageModel.documentName" placeholder="Nombre documento" required>
       <input type="text" name="documentType" #documentType="ngModel" [(ngModel)]="ocrImageModel.documentType" placeholder="Tipo documento" required>
+
+      <input id="uploadImg" (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
+      <label for="uploadImg">
+        <div class="indicador" *ngIf="imageFileName"><span>{{imageFileName}}</span></div>
+        <div class="indicador" *ngIf="!imageFileName"><span>Subir Imagen</span></div>
+      </label>
+
 
 
       <input type="submit" value="Save" [disabled]="!uploadImgForm.form.valid" required>
@@ -21,8 +32,8 @@
     <ul class="list-file" >
       <li class="item-file" (click)="clickImage({src:item.imageName})" *ngFor="let item of savedImages">
         <div class="block">
-          <img id="imageToLoad" src="{{url+'getOcrImage/'+item.imageName}}" #inputImage *ngIf="item.imageName" alt="" class="input-image" (load)="pasaelLoad($event)">
-         <p>{{item.imageName}}</p>
+          <img id="imageToLoad" src="{{url+'getOcrImage/'+item.imageName}}" #inputImage *ngIf="item.imageName" alt="" class="input-image">
+         <!--<p>{{item.imageName}}</p>-->
          <p>{{item.documentName}}</p>
          <p>{{item.documentType}}</p>
         </div>

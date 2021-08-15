@@ -21,6 +21,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
   public statusProcess:string;
   public loadedSrc:any;
   public url=Global.url;
+  public confidence:number;
 
   constructor(
     private ocrService: OcrService
@@ -99,6 +100,8 @@ export class SideBarComponent implements OnInit, OnDestroy{
     console.log('FINALIZO------------->',data);
 
     this.ocrService.cbText.emit(data);
+    this.confidence=data.confidence;
+    console.log(this.confidence);
 
   }
 

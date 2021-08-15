@@ -1,6 +1,6 @@
 <div class="wrapper">
 
-  <ul class="menu">
+  <ul class="menu left">
     <li class="menu-item">
       <span [routerLink]="['']"><i class="fab fa-fort-awesome-alt"></i></span>
     </li>
@@ -11,12 +11,14 @@
       <span [routerLink]="['quick-ocr']">Quick-OCR</span>
     </li>
     <li class="menu-item">
-      <span [routerLink]="['ocr-main']">Ocr Main</span>
+      <span [routerLink]="['ocr-main']">Full-OCR</span>
     </li>
   </ul>
 
   <ul class="menu">
-    <li class="menu-item" [routerLink]="['user-auth']"><span>Login</span></li>
-    <li class="menu-item" [routerLink]="['user-auth']"><span>Registro</span></li>
+    <li class="menu-item" (click)="loginActivate()" [routerLink]="['login']" *ngIf="token==''"><span>Login</span></li>
+    <li class="menu-item" (click)="registerActivate()" [routerLink]="['signUp']" *ngIf="token==''"><span>Registro</span></li>
+    <li class="menu-item logOut" (click)="logOut()"*ngIf="token!=''"><span>Cerrar Sesion</span></li>
+
   </ul>
 </div>

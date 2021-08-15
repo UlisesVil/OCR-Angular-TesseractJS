@@ -24,7 +24,7 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
   public confidence: number;
 
   constructor(
-    private ocrService: OcrService
+    private ocrService: OcrService,
   ) { }
 
   ngOnInit(): void {
@@ -112,8 +112,11 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     this.initSetup();
     this.initialization();
     console.log('Imagen LISTA');
+    window.scrollTo(0,0);
 
   }
+
+
 
 
 

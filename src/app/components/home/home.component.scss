@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
 
+
   .container{
     min-width: 500px;
     width: 60%;
@@ -21,12 +22,14 @@
       width: 40%;
       //border: 1px solid greenyellow;
       border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.411);
       padding: 20px 0;
       cursor: pointer;
       box-shadow:
-        0 1.3px 7.5px -10px rgba(0, 0, 0, 0.085),
-        0 10px 60px -10px rgba(0, 0, 0, 0.17)
+        0 1.3px 7.5px -10px rgba(0, 0, 0, 0.788),
+        0 10px 60px -10px rgba(0, 0, 0, 0.753)
       ;
+
 
 
       .fa-file-alt{
@@ -49,5 +52,13 @@
         padding: 0;
       }
     }
+  }
+
+
+  .column1:hover, .column2:hover{
+    background-color: rgba(0, 0, 0, 0.733) !important;
+    transform: scale(1.2);
+    transition: all ease-in-out 1s;
+
   }
 }

@@ -16,7 +16,7 @@
         </i>
       </ul>
     </div>
-    <div class="column2" [routerLink]="['ocr-main']">
+    <div class="column2" (click)="chooseRoute()">
       <div class="fullOcr">
         <i class="fas fa-file-alt"></i>
         Full OCR
@@ -31,7 +31,7 @@
           characteristic 3
         </i>
       </ul>
-      <div class="auth" [routerLink]="['user-auth']">login</div>
     </div>
   </div>
+
 </div>

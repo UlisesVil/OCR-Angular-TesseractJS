@@ -22,10 +22,10 @@ export class RequestsOCRImagesService {
     return this._http.post(this.url+'save-OcrImageData',params,{headers:headers});
   }
 
-  getImagesData=():Observable<any>=>{
-    //let params = JSON.stringify(ocrImageModel);
+  getImagesData=(userId):Observable<any>=>{
+    let params = JSON.stringify({userId:userId});
     let headers = new HttpHeaders().set("Content-Type","application/json");
-    return this._http.get(this.url+'get-imagesdata');
+    return this._http.post(this.url+'get-imagesdata', params,{headers:headers});
   }
 
 
