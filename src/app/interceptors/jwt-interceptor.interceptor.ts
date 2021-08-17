@@ -14,13 +14,13 @@ import { Router } from '@angular/router';
 export class JwtInterceptorInterceptor implements HttpInterceptor {
 
   constructor(
-    private cookieService: CookieService,
-    private router: Router
+    private _cookieService: CookieService,
+    private _router: Router
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    const token:string = this.cookieService.get('token');
+    const token:string = this._cookieService.get('token');
     let req = request;
     if(token){
       req = request.clone({
@@ -32,7 +32,7 @@ export class JwtInterceptorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((err:HttpErrorResponse)=>{
         if(err.status===401){
-          this.router.navigateByUrl('/login');
+          this._router.navigateByUrl('/login');
         }
         return throwError(err);
       })

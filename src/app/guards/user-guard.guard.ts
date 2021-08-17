@@ -9,17 +9,17 @@ import { Observable } from 'rxjs';
 export class UserGuardGuard implements CanActivate {
 
   constructor(
-    private cookieService: CookieService,
-    private router: Router
+    private _cookieService: CookieService,
+    private _router: Router
   ){}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const cookie = this.cookieService.check('token');
+    const cookie = this._cookieService.check('token');
     if(!cookie){
-      this.router.navigate(['/', 'login' ])
+      this._router.navigate(['/', 'login' ])
     }else{
       return true;
     }

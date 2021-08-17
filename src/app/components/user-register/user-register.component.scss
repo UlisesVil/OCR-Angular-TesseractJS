@@ -4,41 +4,57 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  //border: 1px solid red;
 
   form{
-  min-width: 200px;
-  width: 400px;
-  max-width: 500px;
-  //border: 1px solid red;
-  margin: 40px auto;
-  align-items: center;
-  justify-content: center;
+    min-width: 200px;
+    width: 400px;
+    max-width: 500px;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
 
-    input{
+    input[type=text],
+    input[type=email],
+    input[type=password]{
       display: block;
-      margin-top: 20px;
-      width: 100%;
+      width: 90%;
+      margin: 15px auto 5px;
+      background-color: transparent;
       border: none;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid whitesmoke;
       outline: none;
+      color: whitesmoke;
+      text-shadow: 3px 3px 3px black;
     }
 
-    .passWarning{
-      color: rgb(168, 0, 0);
+    .warnning{
+      margin: 5px 0;
+      color: rgb(209, 0, 0);
       font-size: 12px;
+      text-align: center;
     }
 
     .submit{
+      position: relative;
       width: 100px;
-      background-color: rgba(0, 0, 255, 0.479);
+      margin: 20px 0 0 20px;
+      padding: 5px 0;
       color: white;
       border-radius: 5px;
+      border: none;
+      background-color: rgba(0, 0, 255, 0.479);
     }
 
     .submit:hover{
-      background-color: rgb(0, 36, 136);
+      bottom: 3px;
+      background-color: rgb(0, 51, 192);
+      box-shadow:
+        0 0px 30px rgba(0, 177, 247, 0.616)
+      ;
     }
 
+    .submit:active{
+      bottom: 1px;
+    }
   }
 }

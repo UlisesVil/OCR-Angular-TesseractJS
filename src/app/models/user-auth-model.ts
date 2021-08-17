@@ -5,8 +5,6 @@ export class UserAuthModel{
     public lastName: String,
     public email: String,
     public password: String
-  ){
-
-  }
+  ){ }
 
 }

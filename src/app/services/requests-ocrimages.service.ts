@@ -11,7 +11,6 @@ export class RequestsOCRImagesService {
 
   constructor(
     private _http: HttpClient,
-
   ) {
     this.url=Global.url;
   }
@@ -28,5 +27,8 @@ export class RequestsOCRImagesService {
     return this._http.post(this.url+'get-imagesdata', params,{headers:headers});
   }
 
-
+  deleteImageOCR=(imageId):Observable<any>=>{
+    let headers = new HttpHeaders().set("Content-Type","application/json");
+    return this._http.delete(this.url+'deleteOcrImage/'+imageId,{headers:headers});
+  }
 }

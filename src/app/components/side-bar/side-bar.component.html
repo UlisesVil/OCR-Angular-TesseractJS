@@ -1,13 +1,8 @@
 <ng-container *ngTemplateOutlet="loadingTpl"></ng-container>
 
+<div class="wrapper" [style.height]="(openSideBar)? '90%':'0%'" [style.width]="(openSideBar)? '97%':'0%'">
 
-
-<div class="wrapper" [style.height]="(openSideBar)? '90%':'0%'" [style.width]="(openSideBar)? '100%':'0%'">
-
-  <!--<input (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">-->
-
-
-  <div class="wrapper-sections">
+  <div class="confidenceCont">
     <div  class="confidence" *ngIf="confidence">
         El nivel de confianza en el reconocimiento es de <span [style.color]="confidence < 80? 'red': 'green'">{{confidence}}</span> %
     </div>
@@ -17,25 +12,28 @@
     <div  class="confidence" *ngIf="confidence<80">
       Recuerda que entre mas clara es la imagen mejor el porcentaje de confianza
     </div>
-    <div class="in-wrapper">
-      <ng-container *ngIf="true">
-        <canvas #outputImage class="canvas-overlay"></canvas>
-        <img *ngIf="image" crossorigin="anonymous" id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src="{{url+'getOcrImage/'+image}}" alt=""><!--{{url+'getOcrImage/'+image}}-->
-        <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
-      </ng-container>
+  </div>
+
+  <div class="infoCont">
+    <div class="textResult">
+      <app-output-text></app-output-text>
+    </div>
+    <div class="wrapper-sections">
+      <div class="in-wrapper">
+        <ng-container *ngIf="true">
+          <canvas #outputImage class="canvas-overlay"></canvas>
+          <img *ngIf="image" crossorigin="anonymous" id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src="{{url+'getOcrImage/'+image}}" alt=""><!--{{url+'getOcrImage/'+image}}-->
+        </ng-container>
+      </div>
     </div>
   </div>
 
-  <div class="textResult">
-    <app-output-text></app-output-text>
-  </div>
-
-
 </div>
+
 <div class="wrapper-btn">
   <button (click)="toggleMenu()" >
-    <i class="uil uil-angle-double-left" *ngIf="openSideBar"></i>
-    <i class="uil uil-angle-double-right" *ngIf="!openSideBar"></i>
+    <i class="fas fa-angle-double-down"  *ngIf="!openSideBar"></i>
+    <i class="fas fa-angle-double-up" *ngIf="openSideBar"></i>
   </button>
 </div>
 

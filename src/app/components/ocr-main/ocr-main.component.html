@@ -1,39 +1,31 @@
 <div id="wrapper" class="wrapper">
 
-
-
   <form #uploadImgForm="ngForm" (ngSubmit)="onSubmit(uploadImgForm)">
-    <div id="noImage" *ngIf='!srcLoad'>Sube una Imagen</div>
+
+    <div id="noImage" *ngIf='!srcLoad'>
+      Sube una Imagen
+    </div>
     <img id="imgPrevSave" alt="">
     <div class="inputCont">
-
-
-
-
       <input  type="text" name="documentName" #documentName="ngModel" [(ngModel)]="ocrImageModel.documentName" placeholder="Nombre documento" required>
       <input type="text" name="documentType" #documentType="ngModel" [(ngModel)]="ocrImageModel.documentType" placeholder="Tipo documento" required>
-
-      <input id="uploadImg" (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
       <label for="uploadImg">
         <div class="indicador" *ngIf="imageFileName"><span>{{imageFileName}}</span></div>
         <div class="indicador" *ngIf="!imageFileName"><span>Subir Imagen</span></div>
       </label>
-
-
-
+      <input id="uploadImg" (change)="changeFunc($event)" type="file" name="image" placeholder="subir imagen">
       <input type="submit" value="Save" [disabled]="!uploadImgForm.form.valid" required>
     </div>
   </form>
 
-
-
   <div class="savedImages">
     <p>Seleciona una Imagen que guardaste para Procesarla</p>
+    <p class="deleteWarn" *ngIf="deleteWarn">{{deleteWarn}}</p>
     <ul class="list-file" >
-      <li class="item-file" (click)="clickImage({src:item.imageName})" *ngFor="let item of savedImages">
-        <div class="block">
-          <img id="imageToLoad" src="{{url+'getOcrImage/'+item.imageName}}" #inputImage *ngIf="item.imageName" alt="" class="input-image">
-         <!--<p>{{item.imageName}}</p>-->
+      <li class="item-file" *ngFor="let item of savedImages">
+        <div class="trash" (click)="deleteImagesData(item._id)"><i class="fas fa-trash-alt"></i></div>
+        <div class="block" (click)="clickImage({src:item.imageName})">
+          <img id="imageToLoad" src="{{url+'getOcrImage/'+item.imageName}}" *ngIf="item.imageName" alt="" class="input-image">
          <p>{{item.documentName}}</p>
          <p>{{item.documentType}}</p>
         </div>
@@ -41,8 +33,6 @@
     </ul>
   </div>
 
-<app-side-bar></app-side-bar>
-
-
+  <app-side-bar></app-side-bar>
 
 </div>

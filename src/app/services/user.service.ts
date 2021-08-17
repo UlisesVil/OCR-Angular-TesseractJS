@@ -10,9 +10,7 @@ export class UserService {
 
   constructor(
     private _http: HttpClient
-  ) {
-
-   }
+  ) { }
 
   saveUser=(params):Observable<any>=>{
     params=JSON.stringify(params);

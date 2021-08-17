@@ -2,10 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
-import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.interceptor'
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { OcrMainComponent } from './components/ocr-main/ocr-main.component';
@@ -15,6 +13,9 @@ import { HomeComponent } from './components/home/home.component';
 import { QuickOcrComponent } from './components/quick-ocr/quick-ocr.component';
 import { UserAuthComponent } from './components/user-auth/user-auth.component';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+
+import { CookieService } from 'ngx-cookie-service';
+import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.interceptor'
 
 
 

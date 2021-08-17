@@ -12,7 +12,7 @@ export class OutputTextComponent implements OnInit, OnDestroy {
   public textOut: string;
 
   constructor(
-    private ocrService: OcrService
+    private _ocrService: OcrService
   ) { }
 
   ngOnInit(): void {
@@ -25,12 +25,12 @@ export class OutputTextComponent implements OnInit, OnDestroy {
     });
   }
 
-
   listObserver = () =>{
-    const observer1$ = this.ocrService.cbText
-      .subscribe(({text})=>{
+    const observer1$ = this._ocrService.cbText.subscribe(
+      ({text})=>{
         this.textOut= text;
-    });
+      }
+    );
     this.listSubscribers = [observer1$];
   };
 

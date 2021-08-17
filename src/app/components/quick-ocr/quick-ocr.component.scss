@@ -1,5 +1,4 @@
 .wrapper{
-  //background-color: rgba(245, 245, 245, 0.438);
   width: 100%;
   transition: all ease 200ms;
   padding: 80px 0;
@@ -7,7 +6,7 @@
   .confidence{
     width: fit-content;
     margin: 10px auto;
-
+    text-align: center;
   }
 
   input[type=file]#inputfileup {
@@ -20,37 +19,61 @@
   }
 
   label[for="inputfileup"] {
+    width: 150px;
+    display: block;
+    transition: all .5s;
+    cursor: pointer;
+    padding: 5px 0;
+    margin: 5px auto 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000000;
+    border: 5px solid whitesmoke;
+    border-end-end-radius: 10px;
+    border-end-start-radius: 10px;
+    border-start-end-radius: 10px;
+    border-start-start-radius: 10px;
+    box-sizing: border-box;
     overflow: hidden;
-      font-size: 12px;
-      font-weight: 600;
-      color: #fff;
-      background-color: #000000;
-      display: block;
-      transition: all .5s;
-      cursor: pointer;
-      width: 150px;
-      padding: 5px 0;
-      text-align: center;
-      border: 5px solid whitesmoke;
-      //border-radius: 5px;
-      border-end-end-radius: 10px;
-      border-end-start-radius: 10px;
-      border-start-end-radius: 10px;
-      border-start-start-radius: 10px;
-      box-sizing: border-box;
-      margin: 0px auto;
-      margin-top: 5px;
 
     .indicador{
       display: block;
-      overflow: hidden;
       width: 150px;
       max-width: 200px;
       margin: 0px auto;
+      overflow: hidden;
+    }
+  }
+
+  .noImage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20vh;
+
+    .uploadGif{
+      width: 150px;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    p{
+      line-height: 20px;
+      margin: 0;
+      padding: 0;
+      word-wrap: break-word;
+      text-align: center;
+      text-shadow: 3px 3px 3px black;
+      letter-spacing: 1px;
     }
   }
 
   .OCR-container{
+    width: 100%;
+    height: 200%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -58,44 +81,40 @@
     justify-content: space-around;
     bottom:0;
     left: 0;
-    width: 100%;
-    height: 200%;
     transition: all ease 200ms;
     box-shadow: 0 10.7px 17.9px -6px rgba(0, 0, 0, 0.12),
         0 27.7px 47.1px -6px rgba(0, 0, 0, 0.066),
         0 101px 80px -6px rgba(0, 0, 0, 0.047);
     overflow: hidden;
-    //border: 1px solid red;
-    //overflow-y: scroll;
 
+    .textResult{
+      float: left;
+      width: 40%;
+      margin-top: 20px;
+      padding: 20px 0;
+    }
 
     .wrapper-sections{
       position: relative;
       align-items: flex-start;
-      border: 1px solid red;
       margin-top: 20px;
       padding: 20px 0;
 
       .in-wrapper{
-        display: flex;
-        flex-direction: row;
-        border:1px solid rgb(206, 47, 255);
         width: 100%;
         max-width: 600px;
+        display: flex;
+        flex-direction: row;
         background-color: rgba(0, 0, 0, 0.432);
-
 
         .canvas-overlay{
           position: absolute;
           width: 100%;
           max-width: 600px;
-          //background-color: rgba(201, 201, 201, 0.623);
-          border: 1px solid blue;
         }
 
         .input-image{
           width: 100%;
-          border: 1px solid black;
           border-radius: 5px;
           box-shadow:
             0 1.3px 7.5px -10px rgba(0, 0, 0, 0.085),
@@ -104,52 +123,57 @@
         }
       }
     }
-    .textResult{
-      float: left;
-      width: 40%;
-      //border: 1px solid greenyellow;
-      margin-top: 20px;
-      padding: 20px 0;
-    }
-
   }
 
-
-
-  .noImage{
-    //border: 1px solid red;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20vh;
-
-
-    .uploadGif{
-      width: 150px;
-      display: block;
+  @media screen and (max-width:550px){
+    .noImage{
+      .uploadGif{
+        width: 100px;
+      }
     }
-    p{
-      line-height: 0px;
+
+    .OCR-container{
+
+      .textResult{
+        width: 90%;
+        min-width: 250px;
+        padding: 10px 0;
+      }
+
+      .wrapper-sections{
+
+        .in-wrapper{
+          margin: 0 auto;
+          width: 90%;
+
+          .canvas-overlay{
+            width: 90%;
+            max-width: 600px;
+          }
+
+          .input-image{
+            width: 100%;
+          }
+        }
+      }
     }
   }
-
 }
 
 .loading{
-  position: fixed;
-  z-index: 3;
-  background-color: rgba(0, 0, 0, 0.767);
-  top: 0;
-  left: 0;
   height: 100%;
   width: 100%;
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
   justify-content: center;
   align-items: center;
   align-content: center;
+  background-color: rgba(0, 0, 0, 0.767);
+  z-index: 3;
 
-  .in{
+  .loadingPercent{
     text-align: center;
     padding: 2rem;
     font-weight: 600;

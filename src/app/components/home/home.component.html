@@ -1,37 +1,49 @@
 <div class="wrapper">
+
   <div class="container">
+
     <div class="column1" [routerLink]="['quick-ocr']">
       <div class="quickOcr">
         <i class="far fa-file-alt"></i>
         Quick OCR
       </div>
       <ul class="characteristics">
-        <i class="item">
-          characteristic 1
-        </i><i class="item">
-          characteristic 2
-        </i>
-        <i class="item">
-          characteristic 3
-        </i>
+        <li class="item">
+          No es necesario Iniciar sesion
+        </li>
+        <li class="item">
+          Carga una Imagen sin guardar
+        </li>
+        <li class="item">
+          Obten el texto y copialo
+        </li>
       </ul>
     </div>
+
     <div class="column2" (click)="chooseRoute()">
       <div class="fullOcr">
         <i class="fas fa-file-alt"></i>
         Full OCR
       </div>
       <ul class="characteristics">
-        <i class="item">
-          characteristic 1
-        </i><i class="item">
-          characteristic 2
-        </i>
-        <i class="item">
-          characteristic 3
-        </i>
+        <li class="item">
+          Inicia Sesion
+        </li>
+        <li class="item">
+          Sube una imagen y gurdala
+        </li>
+        <li class="item">
+          Selecciona y escanea tu imagen
+        </li>
+        <li class="item">
+          Obten el texto y copialo
+        </li>
+        <li class="item">
+          Tus imagenes guardadas estaran disponibles siempre que inicies sesion
+        </li>
       </ul>
     </div>
+
   </div>
 
 </div>
