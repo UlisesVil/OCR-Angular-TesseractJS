@@ -24,6 +24,9 @@ export class OcrMainComponent implements OnInit{
   public confidence:number;
   public deleteWarn:string;
 
+  public imageObj: File;
+  public imageUrl:string;
+
   constructor(
     private _ocrService: OcrService,
     private _uploadImagesService: UploadImagesService,
@@ -72,9 +75,9 @@ export class OcrMainComponent implements OnInit{
       response=>{
         //upload image
         let data=response.data;
-        this._uploadImagesService.makeFileRequest(this.url+'upload-image/'+data._id, [], this.imagesToUpload, 'image');//.then((result:any)=>{console.log(result);});
+        this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], this.imageObj, 'image');//.then((result:any)=>{console.log(result);});
         form.reset;
-        window.location.reload();
+        //window.location.reload();
       },
       error=>{
         console.log(<any>error);
@@ -107,7 +110,42 @@ export class OcrMainComponent implements OnInit{
 
     //Upload image to server
     this.ocrImageModel.imageName = e.target.files[0].name;
-    this.imagesToUpload= <Array<File>>e.target.files;
+
+
+    const FILE = (e.target as HTMLInputElement).files[0];
+    this.imageObj = FILE;
+    console.log(FILE);
+    //this.imagesToUpload= <Array<File>>e.target.files;
   }
+
+
+
+
+
+
+
+
+
+  onImagePicked(event:Event){
+    const FILE = (event.target as HTMLInputElement).files[0];
+    this.imageObj = FILE;
+    console.log(FILE);
+
+  }
+
+
+  onImageUpload(){
+    const imageForm:any = new FormData();
+    imageForm.append('image', this.imageObj);
+    console.log(imageForm);
+
+
+    this._uploadImagesService.imageUpload(imageForm).subscribe(res => {
+      this.imageUrl = res['image'];
+      console.log(res);
+
+    });
+  };
+
 
 }

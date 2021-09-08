@@ -22,7 +22,7 @@
       <div class="in-wrapper">
         <ng-container *ngIf="true">
           <canvas #outputImage class="canvas-overlay"></canvas>
-          <img *ngIf="image" crossorigin="anonymous" id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src="{{url+'getOcrImage/'+image}}" alt=""><!--{{url+'getOcrImage/'+image}}-->
+          <img *ngIf="image" crossorigin="anonymous" id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{image}}" alt=""><!--{{url+'getOcrImage/'+image}}-->
         </ng-container>
       </div>
     </div>

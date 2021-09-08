@@ -25,13 +25,31 @@
       <li class="item-file" *ngFor="let item of savedImages">
         <div class="trash" (click)="deleteImagesData(item._id)"><i class="fas fa-trash-alt"></i></div>
         <div class="block" (click)="clickImage({src:item.imageName})">
-          <img id="imageToLoad" src="{{url+'getOcrImage/'+item.imageName}}" *ngIf="item.imageName" alt="" class="input-image">
+          <img id="imageToLoad" src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{item.imageName}}" *ngIf="item.imageName" alt="" class="input-image">
          <p>{{item.documentName}}</p>
          <p>{{item.documentType}}</p>
         </div>
       </li>
     </ul>
   </div>
+
+
+
+  <input (change)="onImagePicked($event)" placeholder="Upload Image"
+   type="file" />
+   <button (click)="onImageUpload()" style="width: fit-content;">Upload Image</button>
+
+    <div *ngIf="imageUrl">
+     Preview Image from AWS
+     <br />
+     <img width="200px" src="https://ocr-angular-app.s3.amazonaws.com/{{
+     imageUrl }}" (click)="clickImage({src:imageUrl})"
+     />
+    </div>
+
+
+
+
 
   <app-side-bar></app-side-bar>
 
