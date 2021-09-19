@@ -25,6 +25,20 @@
       text-shadow: 3px 3px 3px black;
     }
 
+    input:-webkit-autofill {
+      border: none;
+      border-bottom: 1px solid whitesmoke;
+      -webkit-text-fill-color: whitesmoke;
+      -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    .form_error{
+      color: red;
+      margin-left: 20px;
+      font-size: 15px;
+    }
+
     .warnning{
       margin: 5px 0;
       color: rgb(209, 0, 0);
@@ -34,6 +48,7 @@
 
     .submit{
       position: relative;
+      display: block;
       width: 100px;
       color: white;
       border-radius: 5px;
@@ -58,9 +73,11 @@
     .toSignUp{
       font-size: 12px;
       margin:15px 0 0 20px;
+
       span{
         color: yellowgreen;
         font-size: 15px;
+        cursor: pointer;
       }
     }
   }

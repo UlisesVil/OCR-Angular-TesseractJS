@@ -1,33 +1,45 @@
-<ng-container *ngTemplateOutlet="loadingTpl"></ng-container>
-
 <div class="wrapper">
 
   <div  class="confidence" *ngIf="confidence">
-    El nivel de confianza en el reconocimiento es de <span [style.color]="confidence < 80? 'red': 'green'">{{confidence}}</span> %
+    Confidence level in recognition is <span [style.color]="confidence < 80? 'red': 'green'">{{confidence}}</span> %
   </div>
   <div  class="confidence" *ngIf="confidence>=80">
-    Excelente!!! pudimos reconocer la mayor parte del texto en tu imagen
+    Excellent!!! we were able to recognize most of the text in your image
   </div>
   <div  class="confidence" *ngIf="confidence<80">
-    Recuerda que entre mas clara es la imagen mejor el porcentaje de confianza
+    Remember that the clearer the image, the better the confidence percentage
   </div>
 
   <span class="inputfileup">
-    <input (change)="changeFunc($event)" type="file" name="inputfileup" id="inputfileup" class="fileup"/>
+    <input
+      (change)="changeFunc($event)"
+      type="file"
+      name="inputfileup"
+      id="inputfileup"
+      class="fileup"
+    />
   </span>
 
   <label for="inputfileup">
-    <div class="indicador" *ngIf="imageFileName"><span>{{imageFileName}}</span></div>
-    <div class="indicador" *ngIf="!imageFileName"><span>Subir Imagen</span></div>
+    <div class="indicador" *ngIf="imageFileName">
+      <span>{{imageFileName}}</span>
+    </div>
+    <div class="indicador" *ngIf="!imageFileName">
+      <span>Upload Image</span>
+    </div>
   </label>
 
   <div class="noImage" *ngIf="!showBlock">
-    <img class="uploadGif" src="assets/images/AS002099_04.gif" alt="">
-    <p>Da click en el boton de arriba</p>
-    <p>y selecciona una Imagen para que podamos Procesarla</p>
+    <img
+      class="uploadGif"
+      src="assets/images/Upload-PNG.png"
+      alt="upload icon"
+    />
+    <p>Click on the button above</p>
+    <p>and select an image to process it</p>
   </div>
 
-  <div class="OCR-container">
+  <div class="OCR-container" *ngIf="showBlock">
     <div class="textResult" *ngIf="showBlock">
       <app-output-text></app-output-text>
     </div>
@@ -35,8 +47,13 @@
       <div class="in-wrapper">
         <ng-container *ngIf="true">
           <canvas #outputImage class="canvas-overlay"></canvas>
-          <img id="imgPrevQuick" (load)='loadedImage()' #inputImage class="input-image" src='' alt="">
-          <!--<img *ngIf="image" (load)='loadedImage()' #inputImage class="input-image" [src]="'assets/images/'+image" alt="">-->
+          <img
+            id="imgPrevQuick"
+            (load)='loadedImage()'
+            #inputImage
+            class="input-image"
+            src=''
+          />
         </ng-container>
         <div *ngIf="image" class="in-wrapper">
           {{image}}
@@ -47,11 +64,7 @@
 
 </div>
 
-<ng-template #loadingTpl>
-  <div class="loading" *ngIf="loadingPercentage < 100  && loadingPercentage > 10 && statusProcess==='recognizing text'" >
-    <div class="loadingPercent">
-      Analizando el texto de la imagen {{loadingPercentage | number: '1.2-2'}}%...
-      <img class="loadingGif" src="https://i.gifer.com/WMDx.gif" alt="">
-    </div>
-  </div>
-</ng-template>
+<app-ocrloading
+  [statusProcess]="statusProcess"
+  [loadingPercentage]="loadingPercentage"
+></app-ocrloading>

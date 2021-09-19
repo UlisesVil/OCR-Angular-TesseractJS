@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class UserGuardGuard implements CanActivate {
+export class UserGuard implements CanActivate {
 
   constructor(
     private _cookieService: CookieService,
@@ -15,14 +15,14 @@ export class UserGuardGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    state: RouterStateSnapshot
+    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     const cookie = this._cookieService.check('token');
     if(!cookie){
-      this._router.navigate(['/', 'login' ])
+      this._router.navigate(['/', 'login' ]);
     }else{
       return true;
     }
   }
-
 }

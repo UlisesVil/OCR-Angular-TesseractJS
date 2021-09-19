@@ -1,21 +1,31 @@
 <div class="wrapper">
-
   <ul class="menu left">
     <li class="menu-item">
-      <span [routerLink]="['']"><i class="fas fa-scroll"></i></span>
+      <span [routerLink]="['']" title="Go to Main Page">
+        <i class="fas fa-scroll"></i>
+      </span>
     </li>
     <li class="menu-item">
-      <span [routerLink]="['quick-ocr']">Quick OCR</span>
+      <span [routerLink]="['quick-ocr']">
+        Quick OCR
+      </span>
     </li>
     <li class="menu-item">
-      <span [routerLink]="['ocr-main']">Full OCR</span>
+      <span [routerLink]="['ocr-main']">
+        Full OCR
+      </span>
     </li>
   </ul>
 
   <ul class="menu right">
-    <li class="menu-item" [routerLink]="['login']" *ngIf="token==''"><span>Login</span></li>
-    <li class="menu-item" [routerLink]="['signUp']" *ngIf="token==''"><span>Registro</span></li>
-    <li class="menu-item logOut" (click)="logOut()"*ngIf="token!=''"><span>Cerrar Sesion</span></li>
+    <li class="menu-item" [routerLink]="['login']" *ngIf="token==''">
+      <span>Login</span>
+    </li>
+    <li class="menu-item signUp" [routerLink]="['signUp']" *ngIf="token==''">
+      <span>Sign Up</span>
+    </li>
+    <li class="menu-item logOut" (click)="logOut()"*ngIf="token!=''">
+      <span>Log out</span>
+    </li>
   </ul>
-
 </div>

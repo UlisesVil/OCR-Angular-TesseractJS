@@ -1,21 +1,19 @@
 <div class="wrapper">
-
   <div class="container">
-
     <div class="column1" [routerLink]="['quick-ocr']">
       <div class="quickOcr">
         <i class="far fa-file-alt"></i>
-        Quick OCR
+        OCR Quick Version
       </div>
       <ul class="characteristics">
         <li class="item">
-          No es necesario Iniciar sesion
+          - No need to Login
         </li>
         <li class="item">
-          Carga una Imagen sin guardar
+          - Load an Image without saving it
         </li>
         <li class="item">
-          Obten el texto y copialo
+          - Get the text and copy it
         </li>
       </ul>
     </div>
@@ -23,27 +21,25 @@
     <div class="column2" (click)="chooseRoute()">
       <div class="fullOcr">
         <i class="fas fa-file-alt"></i>
-        Full OCR
+        OCR Full Version
       </div>
       <ul class="characteristics">
         <li class="item">
-          Inicia Sesion
+          - Create your Account
         </li>
         <li class="item">
-          Sube una imagen y gurdala
+          - Upload an image and save it
         </li>
         <li class="item">
-          Selecciona y escanea tu imagen
+          - Select to scan your image
         </li>
         <li class="item">
-          Obten el texto y copialo
+          - Get the text and copy it
         </li>
         <li class="item">
-          Tus imagenes guardadas estaran disponibles siempre que inicies sesion
+          - Your saved images will be available whenever you log in
         </li>
       </ul>
     </div>
-
   </div>
-
 </div>

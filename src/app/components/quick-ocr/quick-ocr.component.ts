@@ -10,18 +10,17 @@ import { OcrService } from '../../services/Ocr.service';
 export class QuickOcrComponent implements OnInit, OnDestroy{
   @ViewChild('inputImage') inputImage: ElementRef;
   @ViewChild('outputImage') outputImage: ElementRef;
+  private listSubscribers: any= [];
+  private context: CanvasRenderingContext2D;
   public openSideBar:boolean = false;
-  public listSubscribers: any= [];
   public loading: any;
   public image: any;
-  public worker: any;
-  public context: CanvasRenderingContext2D;
   public loadingPercentage: number;
   public statusProcess:string;
   public loadedSrc:any;
   public showBlock:boolean;
-  public imageFileName:any;
   public confidence: number;
+  public imageFileName:any;
 
   constructor(
     private ocrService: OcrService,
@@ -32,7 +31,7 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     this.showBlock=false;
   }
 
-  toggleMenu = () =>{
+  toggleMenu(){
     this.openSideBar = !this.openSideBar;
   }
 
@@ -40,7 +39,7 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     this.listSubscribers.forEach(element => element.unsubscribe());
   }
 
-  listObserver=()=>{
+  listObserver(){
     const observer1$ = this.ocrService.cbImage.subscribe(({src})=>{
       this.image = src;
       this.openSideBar = true;
@@ -48,12 +47,12 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     this.listSubscribers=[observer1$];
   }
 
-  loadingProgress = (logger) => {
+  loadingProgress(logger){
     this.loadingPercentage= logger.progress * 100;
     this.statusProcess= logger.status;
   }
 
-  initSetup= () => {
+  initSetup(){
     const canvasElement = this.outputImage.nativeElement;
     const imageElement = this.inputImage.nativeElement;
     const { naturalWidth, naturalHeight} = imageElement;
@@ -65,11 +64,16 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     canvasElement.height= naturalHeight;
   }
 
-  draw = (dataIn) => {
+  draw(dataIn){
     dataIn.words.forEach(w=>{
       const bounding = w.bbox;
       this.context.strokeStyle= 'red';
-      this.context.strokeRect(bounding.x0, bounding.y0, bounding.x1 - bounding.x0, bounding.y1 - bounding.y0);
+      this.context.strokeRect(
+        bounding.x0,
+        bounding.y0,
+        bounding.x1 - bounding.x0,
+        bounding.y1 - bounding.y0
+      );
       this.context.beginPath();
       this.context.stroke();
     });
@@ -86,13 +90,13 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     this.confidence=data.confidence;
   }
 
-  loadedImage=()=>{
+  loadedImage(){
     this.initSetup();
     this.initialization();
     window.scrollTo(0,0);
   }
 
-  changeFunc= (e) =>{
+  changeFunc(e){
     this.showBlock=true;
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);

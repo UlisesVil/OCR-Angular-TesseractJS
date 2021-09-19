@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { recognize } from 'tesseract.js';
 import { OcrService } from '../../services/Ocr.service';
-import { Global } from 'src/app/services/global.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -11,16 +10,14 @@ import { Global } from 'src/app/services/global.service';
 export class SideBarComponent implements OnInit, OnDestroy{
   @ViewChild('inputImage') inputImage: ElementRef;
   @ViewChild('outputImage') outputImage: ElementRef;
+  private listSubscribers: any= [];
+  private context: CanvasRenderingContext2D;
   public openSideBar:boolean = false;
-  public listSubscribers: any= [];
   public loading: any;
   public image: any;
-  public worker: any;
-  public context: CanvasRenderingContext2D;
   public loadingPercentage: number;
   public statusProcess:string;
   public loadedSrc:any;
-  public url=Global.url;
   public confidence:number;
 
   constructor(
@@ -31,7 +28,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
     this.listObserver();
   }
 
-  toggleMenu = () =>{
+  toggleMenu(){
     this.openSideBar = !this.openSideBar;
   }
 
@@ -39,7 +36,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
     this.listSubscribers.forEach(element => element.unsubscribe());
   }
 
-  listObserver=()=>{
+  listObserver(){
     const observer1$ = this._ocrService.cbImage.subscribe(({src})=>{
       this.image = src;
       this.openSideBar = true;
@@ -47,12 +44,12 @@ export class SideBarComponent implements OnInit, OnDestroy{
     this.listSubscribers=[observer1$];
   }
 
-  loadingProgress = (logger) => {
+  loadingProgress(logger){
     this.loadingPercentage= logger.progress * 100;
     this.statusProcess= logger.status;
   }
 
-  initSetup= () => {
+  initSetup(){
     const canvasElement = this.outputImage.nativeElement;
     const imageElement = this.inputImage.nativeElement;
     const { naturalWidth, naturalHeight} = imageElement;
@@ -64,7 +61,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
     canvasElement.height= naturalHeight;
   }
 
-  draw = (dataIn) => {
+  draw(dataIn){
     dataIn.words.forEach(w=>{
       const bounding = w.bbox;
       this.context.strokeStyle= 'red';
@@ -85,20 +82,18 @@ export class SideBarComponent implements OnInit, OnDestroy{
     this.confidence=data.confidence;
   }
 
-  loadedImage=()=>{
+  loadedImage(){
     this.initSetup();
     this.initialization();
   }
 
-  changeFunc= (e) =>{
+  changeFunc(e){
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload=function(){
       let imagePrev= document.getElementById('imgPrev');
       let imageSrc:any=reader.result;
       imagePrev.setAttribute('src', imageSrc);
-      console.log(reader.result);
     };
   }
-
 }

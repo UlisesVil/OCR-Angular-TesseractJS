@@ -1,0 +1,16 @@
+<div class="modalWarnings">
+  <div class="errorWarning" *ngIf="errorWarning">
+    <div class="textContent">
+      <i class="fas fa-exclamation-circle"> {{errorWarning}}</i>
+    </div>
+    <button (click)="modalOff()">Ok</button>
+  </div>
+  <div class="okWarning" *ngIf="okWarning">
+    <div class="textContent">
+      <i class="fas fa-check"> {{okWarning}}</i>
+    </div>
+    <video  class="full-media" loop autoplay playsinline="">
+      <source src="https://i.gifer.com/7gQj.mp4" type="video/mp4">
+    </video>
+  </div>
+</div>

@@ -14,18 +14,19 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class OcrMainComponent implements OnInit{
 
-  public imagesToUpload: Array<File>;
+  private imageObj: File;
+  private loggedUser:any;
+  private url= Global.url;
   public ocrImageModel: OcrImage;
   public savedImages:any;
-  public url= Global.url;
-  private loggedUser:any;
   public srcLoad:boolean=false;
   public imageFileName:any;
   public confidence:number;
-  public deleteWarn:string;
-
-  public imageObj: File;
-  public imageUrl:string;
+  public startTitle:boolean= false;
+  public deleteWarn:String;
+  public okWarning:String;
+  public errorWarning:String;
+  public modal: boolean=false;
 
   constructor(
     private _ocrService: OcrService,
@@ -37,15 +38,16 @@ export class OcrMainComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loggedUser= JSON.parse(this._cookieService.get('payload'));
+    this.loggedUser=JSON.parse(this._cookieService.get('payload'));
     this.ocrImageModel.userId=this.loggedUser.id;
     this.getImagesData(this.loggedUser.id);
   }
 
-  getImagesData=(userId)=>{
+  getImagesData(userId){
     this._requestsOCRImagesService.getImagesData(userId).subscribe(
       response=>{
         this.savedImages= response.ImagesOCR;
+        response.ImagesOCR.length > 0 ? this.startTitle = true : this.startTitle = false;
       },
       error=>{
         console.log(<any>error);
@@ -53,11 +55,14 @@ export class OcrMainComponent implements OnInit{
     );
   }
 
-  deleteImagesData=(imageid)=>{
+  deleteImagesData(imageid){
     this._requestsOCRImagesService.deleteImageOCR(imageid).subscribe(
       res=>{
-        this.deleteWarn=res.message;
-        window.location.reload();
+        this.okWarning=res.message;
+        this.modal=true;
+        setTimeout(()=>{
+          window.location.reload();
+        },3000);
       },
       error=>{
         console.log(<any>error);
@@ -65,27 +70,36 @@ export class OcrMainComponent implements OnInit{
     );
   }
 
-  clickImage = ( image ) =>{
+  clickImage(image){
     this._ocrService.cbImage.emit(image);
     window.scrollTo(0,0);
   }
 
-  onSubmit=(form)=>{
+  onSubmit(form){
     this._requestsOCRImagesService.saveOcrImages(this.ocrImageModel).subscribe(
       response=>{
-        //upload image
         let data=response.data;
-        this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], this.imageObj, 'image');//.then((result:any)=>{console.log(result);});
-        form.reset;
-        //window.location.reload();
+        this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], this.imageObj, 'image')
+          .then((result:any)=>{
+            if(result.message){
+              this.modal=true;
+              this.okWarning=result.message;
+              setTimeout(()=>{
+                window.location.reload();
+              },3000);
+            }
+          })
+        ;
       },
       error=>{
         console.log(<any>error);
+        this.errorWarning=<any>error.error.message;
+        this.modal=true;
       }
     );
   }
 
-  changeFunc= (e:any) =>{
+  changeFunc(e:any){
     this.srcLoad=true;
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -100,52 +114,20 @@ export class OcrMainComponent implements OnInit{
       let ext=arrStr.slice(indexExt,arrStr.length).join('');
       this.imageFileName=newName+'..'+ext;
     }
-
     //Image Preview
     reader.onload=function(){
       let imagePrev= document.getElementById('imgPrevSave');
       var imageSrc:any=reader.result;
       imagePrev.setAttribute('src', imageSrc);
     };
-
     //Upload image to server
     this.ocrImageModel.imageName = e.target.files[0].name;
-
-
     const FILE = (e.target as HTMLInputElement).files[0];
     this.imageObj = FILE;
-    console.log(FILE);
-    //this.imagesToUpload= <Array<File>>e.target.files;
   }
 
-
-
-
-
-
-
-
-
-  onImagePicked(event:Event){
-    const FILE = (event.target as HTMLInputElement).files[0];
-    this.imageObj = FILE;
-    console.log(FILE);
-
+  modalOff(e){
+    this.modal=e.modal;
+    this.errorWarning=e.errorWarning;
   }
-
-
-  onImageUpload(){
-    const imageForm:any = new FormData();
-    imageForm.append('image', this.imageObj);
-    console.log(imageForm);
-
-
-    this._uploadImagesService.imageUpload(imageForm).subscribe(res => {
-      this.imageUrl = res['image'];
-      console.log(res);
-
-    });
-  };
-
-
 }

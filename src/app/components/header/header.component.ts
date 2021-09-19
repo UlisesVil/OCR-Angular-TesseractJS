@@ -23,11 +23,11 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.menusInSession();
   }
 
-  menusInSession=()=>{
+  menusInSession(){
     this.token = this._cookieService.get('token');
   }
 
-  logOut=()=>{
+  logOut(){
     this._cookieService.deleteAll('/');
     this._router.navigate(['']).then(()=>{
       window.location.reload();

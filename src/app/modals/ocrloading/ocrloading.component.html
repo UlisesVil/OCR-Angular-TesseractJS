@@ -1,0 +1,18 @@
+<div class="loading" *ngIf="statusProcess!='' && statusProcess && loadingPercentage!=100">
+  <div class="processContent">
+    <p class="statusProcess">{{statusProcess}}...</p>
+    <div
+      class="contentLoading"
+      *ngIf="loadingPercentage < 100
+        && loadingPercentage > 0
+        && statusProcess==='recognizing text'"
+    >
+      <p>Please wait a moment</p>
+      <p>Desde el Modal</p>
+      we are analyzing the text of the image {{loadingPercentage | number: '1.2-2'}}%...
+      <video  class="loadingGif" loop autoplay playsinline="">
+        <source src="https://i.gifer.com/7gQj.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,17 @@
 .wrapper{
   width: 100%;
-  transition: all ease 200ms;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 80px 0;
+  transition: all ease 200ms;
 
   .confidence{
     width: fit-content;
     margin: 10px auto;
+    padding: 10px 10px;
     text-align: center;
   }
 
@@ -20,11 +26,10 @@
 
   label[for="inputfileup"] {
     width: 150px;
-    display: block;
     transition: all .5s;
     cursor: pointer;
     padding: 5px 0;
-    margin: 5px auto 0;
+    margin: 5px auto 10px;
     text-align: center;
     font-size: 12px;
     font-weight: 600;
@@ -47,15 +52,20 @@
     }
   }
 
+  label[for="inputfileup"]:hover{
+    background: rgba(0, 177, 247, 0.616);
+    text-shadow: 2px 2px 3px black;
+    box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+  }
+
   .noImage{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20vh;
 
     .uploadGif{
-      width: 150px;
+      width: 100px;
       display: block;
       margin-bottom: 20px;
     }
@@ -72,16 +82,18 @@
   }
 
   .OCR-container{
-    width: 100%;
+    width: 95%;
     height: 200%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    justify-content: space-around;
+    justify-content: space-evenly;
     bottom:0;
     left: 0;
     transition: all ease 200ms;
+    background: rgba(0, 0, 0, 0.445);
+    border-radius: 5px;
     box-shadow: 0 10.7px 17.9px -6px rgba(0, 0, 0, 0.12),
         0 27.7px 47.1px -6px rgba(0, 0, 0, 0.066),
         0 101px 80px -6px rgba(0, 0, 0, 0.047);
@@ -133,7 +145,6 @@
     }
 
     .OCR-container{
-
       .textResult{
         width: 90%;
         min-width: 250px;
@@ -141,7 +152,6 @@
       }
 
       .wrapper-sections{
-
         .in-wrapper{
           margin: 0 auto;
           width: 90%;
@@ -159,32 +169,3 @@
     }
   }
 }
-
-.loading{
-  height: 100%;
-  width: 100%;
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background-color: rgba(0, 0, 0, 0.767);
-  z-index: 3;
-
-  .loadingPercent{
-    text-align: center;
-    padding: 2rem;
-    font-weight: 600;
-    font-size: 1rem;
-    color: whitesmoke;
-
-    .loadingGif{
-      width: 70px;
-      display: block;
-      margin: 20px auto;
-    }
-  }
-}
-

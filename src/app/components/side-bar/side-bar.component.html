@@ -1,20 +1,25 @@
-<ng-container *ngTemplateOutlet="loadingTpl"></ng-container>
-
-<div class="wrapper" [style.height]="(openSideBar)? '90%':'0%'" [style.width]="(openSideBar)? '97%':'0%'">
+<div
+  class="wrapper"
+  [style.height]="(openSideBar)? '94%':'0%'"
+  [style.width]="(openSideBar)? '98%':'0%'"
+>
 
   <div class="confidenceCont">
     <div  class="confidence" *ngIf="confidence">
-        El nivel de confianza en el reconocimiento es de <span [style.color]="confidence < 80? 'red': 'green'">{{confidence}}</span> %
+      Confidence level in recognition is
+      <span [style.color]="confidence < 80? 'red': 'green'">
+        {{confidence}}
+      </span> %
     </div>
     <div  class="confidence" *ngIf="confidence>=80">
-      Excelente!!! pudimos reconocer la mayor parte del texto en tu imagen
+      Excellent!!! we were able to recognize most of the text in your image
     </div>
     <div  class="confidence" *ngIf="confidence<80">
-      Recuerda que entre mas clara es la imagen mejor el porcentaje de confianza
+      Remember that the clearer the image, the better the confidence percentage
     </div>
   </div>
 
-  <div class="infoCont">
+  <div class="infoCont" *ngIf="image">
     <div class="textResult">
       <app-output-text></app-output-text>
     </div>
@@ -22,28 +27,28 @@
       <div class="in-wrapper">
         <ng-container *ngIf="true">
           <canvas #outputImage class="canvas-overlay"></canvas>
-          <img *ngIf="image" crossorigin="anonymous" id="imgPrev" (load)='loadedImage()' #inputImage class="input-image" src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{image}}" alt=""><!--{{url+'getOcrImage/'+image}}-->
+          <img
+            *ngIf="image"
+            id="imgPrev"
+            (load)='loadedImage()'
+            #inputImage
+            class="input-image"
+            src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{image}}"
+          >
         </ng-container>
       </div>
     </div>
   </div>
-
 </div>
 
 <div class="wrapper-btn">
-  <button (click)="toggleMenu()" >
+  <button (click)="toggleMenu()">
     <i class="fas fa-angle-double-down"  *ngIf="!openSideBar"></i>
     <i class="fas fa-angle-double-up" *ngIf="openSideBar"></i>
   </button>
 </div>
 
-<ng-template #loadingTpl>
-  <div class="loading" *ngIf="loadingPercentage < 100  && loadingPercentage > 0 && statusProcess==='recognizing text'" >
-    <div class="in">
-      Analizando el texto de la imagen {{loadingPercentage | number: '1.2-2'}}%...
-      <img class="loadingGif" src="https://i.gifer.com/WMDx.gif" alt="">
-    </div>
-  </div>
-</ng-template>
-
-
+<app-ocrloading
+  [statusProcess]="statusProcess"
+  [loadingPercentage]="loadingPercentage"
+></app-ocrloading>

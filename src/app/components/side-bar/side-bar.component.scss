@@ -1,11 +1,11 @@
 .wrapper{
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   bottom:0;
   left: 0;
   right: 0;
-  top: 50px;
+  top: 40px;
   transition: all ease 200ms;
   background-color: rgba(0, 0, 0, 0.863);
   overflow-y: scroll;
@@ -46,7 +46,7 @@
       min-width: 400px;
       width: 40%;
       margin-top: 20px;
-      padding: 20px 0;
+      padding: 20px 20px;
     }
 
     .wrapper-sections{
@@ -91,9 +91,7 @@
   }
 }
 
-
 .wrapper-btn{
-
   button{
     position: fixed;
     top: 50px;
@@ -113,38 +111,15 @@
     z-index: 4;
 
     .fa-angle-double-down,
-    .fa-angle-double-up
-    {
+    .fa-angle-double-up{
       color: whitesmoke;
       font-size: 17px;
     }
   }
-}
 
-.loading{
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  background-color: rgba(0, 0, 0, 0.767);
-  z-index: 3;
-
-  .in{
-    padding: 2rem;
-    font-weight: 600;
-    font-size: 1rem;
-    text-align: center;
-    color: whitesmoke;
-
-    .loadingGif{
-      width: 70px;
-      display: block;
-      margin: 20px auto;
-    }
+  button:hover{
+    background: rgba(0, 177, 247, 0.616);
+    box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+    text-shadow: 2px 2px 3px black;
   }
 }

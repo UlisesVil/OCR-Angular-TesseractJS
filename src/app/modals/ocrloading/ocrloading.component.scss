@@ -1,0 +1,48 @@
+.loading{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.767);
+  z-index: 3;
+
+  .processContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    min-width: 200px;
+    height: fit-content;
+    padding: 20px 0 20px 0;
+    color: yellowgreen;
+    text-align: center;
+    background: #000000;
+    border-radius: 5px;
+    border: 1px solid yellowgreen;
+
+    .statusProcess{
+      text-transform: capitalize;
+    }
+
+    .contentLoading{
+      padding: 0 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      text-align: center;
+      color: whitesmoke;
+
+      .loadingGif{
+        width: 150px;
+        display: block;
+        margin: 20px auto;
+      }
+    }
+  }
+}

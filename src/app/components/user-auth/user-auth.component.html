@@ -1,39 +1,60 @@
 <div class="wrapper">
-
   <form #loginForm= "ngForm" (ngSubmit)="onSubmitlogin(loginForm)" >
-    <input type="email"
-           name="email"
-           #email="ngModel"
-           [(ngModel)]="user.email"
-           placeholder="E-mail"
-           required
+    <input
+      type="email"
+      name="email"
+      #email="ngModel"
+      [(ngModel)]="user.email"
+      placeholder="E-mail"
+      [email]="true"
+      required
     >
-    <input type="password"
-           name="password"
-           #password="ngModel"
-           [(ngModel)]="user.password"
-           placeholder="Password"
-           required
+    <span class="form_error" *ngIf="email.touched && !email.valid ">
+      <strong>*Please enter a valid E-mail</strong>
+    </span>
+
+    <input
+      type="password"
+      name="password"
+      #password="ngModel"
+      [(ngModel)]="user.password"
+      placeholder="Password"
+      required
     >
-    <input type="password"
-           name="password2"
-           #password2="ngModel"
-           [(ngModel)]="confirm"
-           placeholder="Confirm Password"
-           required
+    <span class="form_error" *ngIf="password.touched && !password.valid ">
+      <strong>*Password is required</strong>
+    </span>
+
+    <input
+      type="password"
+      name="passwordConfirm"
+      #passwordConfirm="ngModel"
+      [(ngModel)]="confirm"
+      placeholder="Confirm Password"
+      required
     >
-    <p class="warnning" *ngIf="passwordWarn">
-      La contraseña no coincide con la Confirmada
-    </p>
-    <input class="submit"
-           type="submit"
-           value="Login"
+    <span class="form_error" *ngIf="passwordConfirm.touched && !passwordConfirm.valid ">
+      <strong>*Please confirm your password</strong>
+    </span>
+
+    <input
+      class="submit"
+      type="submit"
+      value="Login"
     >
+
     <div class="toSignUp">
-      Aun No estas registrado? da click
+      Still not registered? click
       <span [routerLink]="['/signUp']">
-        Aqui !!!
+        Here !!!
       </span>
     </div>
   </form>
 </div>
+
+<app-loadwarnings
+  *ngIf="modal"
+  [okWarning]="okWarning"
+  [errorWarning]="errorWarning"
+  (deactivateErrorMessage)="modalOff($event)"
+></app-loadwarnings>

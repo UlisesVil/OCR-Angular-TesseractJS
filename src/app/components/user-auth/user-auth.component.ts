@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 })
 export class UserAuthComponent implements OnInit {
   public user:UserAuthModel;
-  public confirm:string;
-  public passwordWarn:boolean;
+  public confirm:String;
+  public errorWarning:String;
+  public okWarning:String;
+  public modal:boolean=false;
 
   constructor(
     private _userService: UserService,
@@ -23,25 +25,35 @@ export class UserAuthComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.passwordWarn=false;
   }
 
-  onSubmitlogin=(form)=>{
+  onSubmitlogin(form){
     if(this.user.password===this.confirm){
       this._userService.login(this.user).subscribe(
         res=>{
           this._cookieService.set('token', res.token);
           this._cookieService.set('payload', JSON.stringify(res.payload));
-          this._router.navigate(['/ocr-main']).then(()=>{
-            window.location.reload();
-          });
+          this.okWarning=res.message+' '+res.payload.userName;
+          this.modal=true;
+          setTimeout(()=>{
+            this._router.navigate(['/ocr-main']).then(()=>{
+              window.location.reload();
+            });
+          },3000);
         },error=>{
           console.log(<any>error);
+          this.errorWarning=<any>error.error.message;
+          this.modal=true;
         }
       );
-      this.passwordWarn=false;
     }else{
-      this.passwordWarn=true;
+      this.errorWarning='The password does not match the Confirmed one';
+      this.modal=true;
     }
+  }
+
+  modalOff(e){
+    this.modal=e.modal;
+    this.errorWarning=e.errorWarning;
   }
 }

@@ -1,10 +1,10 @@
 .wrapper{
   position: fixed;
-  display: flex;
   width: 100%;
+  display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.575);
+  background-color: rgba(0, 0, 0, 0.863);
   color: #9ac8df;
   z-index: 5;
 
@@ -27,6 +27,22 @@
       .fa-scroll{
         font-size: 20px;
       }
+    }
+
+    .logOut, .signUp{
+      margin-right: 20px;
+    }
+
+    @media screen and (max-width:400px){
+      .logOut, .signUp{
+        margin-right: 5px;
+      }
+
+    }
+
+    .menu-item:hover{
+      text-shadow: 0px 0px 10px whitesmoke;
+      color: #00aaff;
     }
   }
 }

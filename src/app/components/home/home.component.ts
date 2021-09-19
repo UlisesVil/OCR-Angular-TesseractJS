@@ -17,9 +17,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  chooseRoute=()=>{
+  chooseRoute(){
     let token= this._cookieService.get('token');
-
     if(token!=''){
       this._router.navigate(['/ocr-main']);
     }else{

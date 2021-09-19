@@ -25,7 +25,7 @@ export class OutputTextComponent implements OnInit, OnDestroy {
     });
   }
 
-  listObserver = () =>{
+  listObserver(){
     const observer1$ = this._ocrService.cbText.subscribe(
       ({text})=>{
         this.textOut= text;
@@ -33,5 +33,4 @@ export class OutputTextComponent implements OnInit, OnDestroy {
     );
     this.listSubscribers = [observer1$];
   };
-
 }
