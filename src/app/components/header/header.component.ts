@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit, OnChanges {
   }
 
   logOut(){
-    this._cookieService.deleteAll('/');
+    this._cookieService.deleteAll();
     this._router.navigate(['']).then(()=>{
       window.location.reload();
     });

@@ -17,7 +17,8 @@ import { OutputTextComponent } from './components/output-text/output-text.compon
 import { CookieService } from 'ngx-cookie-service';
 import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.interceptor';
 import { LoadwarningsComponent } from './modals/loadwarnings/loadwarnings.component';
-import { OcrloadingComponent } from './modals/ocrloading/ocrloading.component'
+import { OcrloadingComponent } from './modals/ocrloading/ocrloading.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { OcrloadingComponent } from './modals/ocrloading/ocrloading.component'
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptorInterceptor,
       multi:true
-    }
+    },
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
