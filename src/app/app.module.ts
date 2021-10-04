@@ -19,6 +19,8 @@ import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.inter
 import { LoadwarningsComponent } from './modals/loadwarnings/loadwarnings.component';
 import { OcrloadingComponent } from './modals/ocrloading/ocrloading.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     CookieService,{
