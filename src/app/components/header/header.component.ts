@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit, OnChanges {
   public token:string;
+  public openSideBar:boolean = false;
 
   constructor(
     private _cookieService: CookieService,
@@ -32,6 +33,10 @@ export class HeaderComponent implements OnInit, OnChanges {
     this._router.navigate(['']).then(()=>{
       window.location.reload();
     });
+  }
+
+  toggleMenu(){
+    this.openSideBar = !this.openSideBar;
   }
 
 }

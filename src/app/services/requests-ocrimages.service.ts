@@ -31,4 +31,10 @@ export class RequestsOCRImagesService {
     let headers = new HttpHeaders().set("Content-Type","application/json");
     return this._http.delete(this.url+'deleteOcrImage/'+imageId,{headers:headers});
   }
+
+  getbase64Image(image):Observable<any>{
+    let params = JSON.stringify(image);
+    let headers = new HttpHeaders().set("Content-Type","application/json");
+    return this._http.post(this.url+'getbase64Image', params,{headers:headers});
+  }
 }

@@ -12,6 +12,11 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls":[
+          "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap",
+          "https://unicons.iconscout.com/release/v4.0.0/css/line.css",
+          "https://kit.fontawesome.com/94235d9528.js"
         ]
       }
     },
@@ -22,8 +27,28 @@
       "resources": {
         "files": [
           "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani|mp4)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "data-api",
+      "urls": [
+        "https://unpkg.com/tesseract.js@v2.0.0/dist/worker.min.js",
+        "https://unpkg.com/tesseract.js-core@v2.0.0/tesseract-core.wasm.js",
+        "https://backend-angular-apps.herokuapp.com/ocrApp/login",
+        "https://backend-angular-apps.herokuapp.com/ocrApp/save-user",
+        "https://backend-angular-apps.herokuapp.com/ocrApp/get-imagesdata",
+        "https://backend-angular-apps.herokuapp.com/ocrApp"
+
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 5,
+        "maxAge": "50m",
+        "timeout": "5s"
       }
     }
   ]

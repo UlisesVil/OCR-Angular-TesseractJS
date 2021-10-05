@@ -1,31 +1,41 @@
-<div class="wrapper">
-  <ul class="menu left">
+<div class="wrapper"
+  class="wrapper"
+  [style.height]="(openSideBar)? '400px':'0%'"
+  [style.width]="(openSideBar)? '200px':'0%'"
+  [style.visibility]="(openSideBar)? 'visible':'hidden'"
+>
+  <ul class="menu">
     <li class="menu-item">
-      <span [routerLink]="['']" title="Go to Main Page">
-        <i class="fas fa-scroll"></i>
+      <span [routerLink]="['']" title="Go to Main Page" (click)="toggleMenu()">
+        Home
       </span>
     </li>
     <li class="menu-item">
-      <span [routerLink]="['quick-ocr']">
+      <span [routerLink]="['quick-ocr']" (click)="toggleMenu()">
         Quick OCR
       </span>
     </li>
     <li class="menu-item">
-      <span [routerLink]="['ocr-main']">
+      <span [routerLink]="['ocr-main']" (click)="toggleMenu()">
         Full OCR
       </span>
     </li>
-  </ul>
-
-  <ul class="menu right">
-    <li class="menu-item" [routerLink]="['login']" *ngIf="token==''">
+    <li class="menu-item" [routerLink]="['login']" *ngIf="token==''" (click)="toggleMenu()">
       <span>Login</span>
     </li>
-    <li class="menu-item signUp" [routerLink]="['signUp']" *ngIf="token==''">
+    <li class="menu-item signUp" [routerLink]="['signUp']" *ngIf="token==''" (click)="toggleMenu()">
       <span>Sign Up</span>
     </li>
-    <li class="menu-item logOut" (click)="logOut()"*ngIf="token!=''">
+    <li class="menu-item logOut" (click)="logOut(); toggleMenu()"*ngIf="token!=''">
       <span>Log out</span>
     </li>
   </ul>
+</div>
+
+
+<div class="wrapper-btn">
+  <button (click)="toggleMenu()">
+    <i class="fas fa-bars"  *ngIf="!openSideBar"></i>
+    <i class="fas fa-times" *ngIf="openSideBar"></i>
+  </button>
 </div>

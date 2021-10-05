@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { recognize } from 'tesseract.js';
 import { OcrService } from '../../services/Ocr.service';
+import { RequestsOCRImagesService } from '../../services/requests-ocrimages.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -21,7 +22,8 @@ export class SideBarComponent implements OnInit, OnDestroy{
   public confidence:number;
 
   constructor(
-    private _ocrService: OcrService
+    private _ocrService: OcrService,
+    private _requestsOCRImagesService: RequestsOCRImagesService
   ) { }
 
   ngOnInit(): void {
@@ -71,10 +73,20 @@ export class SideBarComponent implements OnInit, OnDestroy{
     });
   }
 
-  initialization = async() => {
+  getbase64Image(image){
+    this._requestsOCRImagesService.getbase64Image({image:image}).subscribe(
+      response=>{
+        this.initialization(response.image);
+      },
+      err=>{
+      console.log(<any>err);
+    });
+  }
+
+  initialization = async(image) => {
     this.loading= true;
     const imageElement = this.inputImage.nativeElement;
-    const {data}= await recognize (imageElement, 'spa',{
+    const {data}= await recognize (image, 'spa',{
       logger: m => this.loadingProgress(m)
     });
     this.draw(data);
@@ -82,9 +94,9 @@ export class SideBarComponent implements OnInit, OnDestroy{
     this.confidence=data.confidence;
   }
 
-  loadedImage(){
+  loadedImage(image){
     this.initSetup();
-    this.initialization();
+    this.getbase64Image(image);
   }
 
   changeFunc(e){

@@ -1,7 +1,8 @@
 <div
   class="wrapper"
-  [style.height]="(openSideBar)? '94%':'0%'"
+  [style.height]="(openSideBar)? '90%':'0%'"
   [style.width]="(openSideBar)? '98%':'0%'"
+  [style.visibility]="(openSideBar)? 'visible':'hidden'"
 >
 
   <div class="confidenceCont">
@@ -30,7 +31,7 @@
           <img
             *ngIf="image"
             id="imgPrev"
-            (load)='loadedImage()'
+            (load)='loadedImage(image)'
             #inputImage
             class="input-image"
             src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{image}}"
