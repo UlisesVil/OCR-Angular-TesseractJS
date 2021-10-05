@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1633403913337,
+  "timestamp": 1633405062414,
   "index": "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html",
   "assetGroups": [
     {
@@ -21,11 +21,7 @@
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com\\/css2\\?family=IBM\\+Plex\\+Sans:wght@300;400;500;600&display=swap",
         "https:\\/\\/unicons\\.iconscout\\.com\\/release\\/v4\\.0\\.0\\/css\\/line\\.css",
-        "https:\\/\\/kit\\.fontawesome\\.com\\/94235d9528\\.js",
-        "https:\\/\\/unpkg\\.com\\/tesseract\\.js@v2\\.0\\.0\\/dist\\/worker\\.min\\.js",
-        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/login",
-        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/save-user",
-        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/get-imagesdata"
+        "https:\\/\\/kit\\.fontawesome\\.com\\/94235d9528\\.js"
       ]
     },
     {
@@ -68,7 +64,26 @@
       "patterns": []
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "data-api",
+      "patterns": [
+        "https:\\/\\/unpkg\\.com\\/tesseract\\.js@v2\\.0\\.0\\/dist\\/worker\\.min\\.js",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/login",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/save-user",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/get-imagesdata",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp"
+      ],
+      "strategy": "freshness",
+      "maxSize": 5,
+      "maxAge": 3000000,
+      "timeoutMs": 5000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
   "hashTable": {
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/assets/icons/icon-128x128.png": "73ab5f5d85c6fef0906546bde7c1c193b669948c",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/assets/icons/icon-144x144.png": "f0dfb5005b3b0b4908525488b5caa6f303583609",
