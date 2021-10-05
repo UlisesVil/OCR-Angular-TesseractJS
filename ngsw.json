@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1633405062414,
+  "timestamp": 1633406346220,
   "index": "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html",
   "assetGroups": [
     {
@@ -69,6 +69,7 @@
       "name": "data-api",
       "patterns": [
         "https:\\/\\/unpkg\\.com\\/tesseract\\.js@v2\\.0\\.0\\/dist\\/worker\\.min\\.js",
+        "https:\\/\\/unpkg\\.com\\/tesseract\\.js-core@v2\\.0\\.0\\/tesseract-core\\.wasm\\.js",
         "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/login",
         "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/save-user",
         "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/get-imagesdata",
