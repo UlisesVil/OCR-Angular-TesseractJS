@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1633333632308,
+  "timestamp": 1633403913337,
   "index": "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html",
   "assetGroups": [
     {
@@ -18,7 +18,15 @@
         "https://ulisesvil.github.io/OCR-Angular-TesseractJS/runtime.e227d1a0e31cbccbf8ec.js",
         "https://ulisesvil.github.io/OCR-Angular-TesseractJS/styles.e28cea0a16a7a301639b.css"
       ],
-      "patterns": []
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/css2\\?family=IBM\\+Plex\\+Sans:wght@300;400;500;600&display=swap",
+        "https:\\/\\/unicons\\.iconscout\\.com\\/release\\/v4\\.0\\.0\\/css\\/line\\.css",
+        "https:\\/\\/kit\\.fontawesome\\.com\\/94235d9528\\.js",
+        "https:\\/\\/unpkg\\.com\\/tesseract\\.js@v2\\.0\\.0\\/dist\\/worker\\.min\\.js",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/login",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/save-user",
+        "https:\\/\\/backend-angular-apps\\.herokuapp\\.com\\/ocrApp\\/get-imagesdata"
+      ]
     },
     {
       "name": "assets",
