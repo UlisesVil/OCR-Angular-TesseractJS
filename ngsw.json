@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1633456334810,
+  "timestamp": 1633615975263,
   "index": "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html",
   "assetGroups": [
     {
@@ -26,7 +26,7 @@
     },
     {
       "name": "assets",
-      "installMode": "lazy",
+      "installMode": "prefetch",
       "updateMode": "prefetch",
       "cacheQueryOptions": {
         "ignoreVary": true
