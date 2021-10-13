@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1634007227911,
+  "timestamp": 1634143996020,
   "index": "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html",
-        "https://ulisesvil.github.io/OCR-Angular-TesseractJS/main.622f889039fcca3c1b90.js",
+        "https://ulisesvil.github.io/OCR-Angular-TesseractJS/main.8ed132bfb2c75b663277.js",
         "https://ulisesvil.github.io/OCR-Angular-TesseractJS/manifest.webmanifest",
         "https://ulisesvil.github.io/OCR-Angular-TesseractJS/polyfills.d6e363c4d3788442fc0f.js",
         "https://ulisesvil.github.io/OCR-Angular-TesseractJS/runtime.e227d1a0e31cbccbf8ec.js",
-        "https://ulisesvil.github.io/OCR-Angular-TesseractJS/styles.5ee2dc25132801a907af.css"
+        "https://ulisesvil.github.io/OCR-Angular-TesseractJS/styles.2b890bb49c6766c9e871.css"
       ],
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com\\/css2\\?family=IBM\\+Plex\\+Sans:wght@300;400;500;600&display=swap",
@@ -116,13 +116,13 @@
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/assets/images/no loss/fav4.svg": "4ccef9219a5ee4ebb0e9ccf0d3d054fa46229f6d",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/assets/images/no loss/redbackground.jpg": "158b7270110b7084d5d8c25735fe0564fb1abee4",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/assets/images/redbackground.jpg": "f808e5da6f37dbfdd8c42dc94440234b58b4653a",
-    "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html": "80e6f7621dbe67cfd11ae40bf825cbb4ec216a8d",
-    "https://ulisesvil.github.io/OCR-Angular-TesseractJS/main.622f889039fcca3c1b90.js": "6cb6e2aae4f6d9d7a8c25cc99a12220f94b6a9c7",
+    "https://ulisesvil.github.io/OCR-Angular-TesseractJS/index.html": "a40dcd7913d5e15b12f54184ff9f420a2de4765e",
+    "https://ulisesvil.github.io/OCR-Angular-TesseractJS/main.8ed132bfb2c75b663277.js": "0a3a772ce6e9a893c740bbdcf20cb9445009cf70",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/manifest.webmanifest": "943a77cf65a649d7d29bb82f37207edd5e160682",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/polyfills.d6e363c4d3788442fc0f.js": "d0fee4aed1e5841843f11dd1898fa893c72043f4",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/redbackground.58f60041c4600c791a14.jpg": "f808e5da6f37dbfdd8c42dc94440234b58b4653a",
     "https://ulisesvil.github.io/OCR-Angular-TesseractJS/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "https://ulisesvil.github.io/OCR-Angular-TesseractJS/styles.5ee2dc25132801a907af.css": "6b6ce246e9c552187e52b9fdb46c666ba22c6ef1"
+    "https://ulisesvil.github.io/OCR-Angular-TesseractJS/styles.2b890bb49c6766c9e871.css": "0ae7b53ff329599627d6f1a659db4719829c5050"
   },
   "navigationUrls": [
     {
