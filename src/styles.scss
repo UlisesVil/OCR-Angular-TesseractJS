@@ -5,7 +5,6 @@ html, body{
   font-family:'IBM Plex Sans', sans-serif;
   font-weight: 500;
   color: whitesmoke;
-  background-color: #ffffff;
   background-image: url("assets/images/redbackground.jpg");
   background-attachment: fixed;
   background-size: cover;
@@ -40,4 +39,10 @@ html, body{
   width: 10px;
   background: red;
   border-radius: 20px;
+}
+
+.black-snackbar{
+  color: whitesmoke;
+  background-color: rgb(17, 17, 17);
+  border:1px solid yellowgreen ;
 }

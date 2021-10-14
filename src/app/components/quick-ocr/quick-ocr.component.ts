@@ -101,7 +101,6 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     var fileName=e.target.files[0].name;
-
     if(fileName.length<14){
       this.imageFileName=e.target.files[0].name;
     }else{
@@ -111,7 +110,6 @@ export class QuickOcrComponent implements OnInit, OnDestroy{
       let ext=arrStr.slice(indexExt,arrStr.length).join('');
       this.imageFileName=newName+'..'+ext;
     };
-
     reader.onload=function(){
       let imagePrev= document.getElementById('imgPrevQuick');
       let imageSrc:any=reader.result;

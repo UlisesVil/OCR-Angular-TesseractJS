@@ -20,6 +20,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
   public statusProcess:string;
   public loadedSrc:any;
   public confidence:number;
+  public imageLoaded:string;
 
   constructor(
     private _ocrService: OcrService,
@@ -40,8 +41,14 @@ export class SideBarComponent implements OnInit, OnDestroy{
 
   listObserver(){
     const observer1$ = this._ocrService.cbImage.subscribe(({src})=>{
-      this.image = src;
-      this.openSideBar = true;
+        var index=src.indexOf('base64');
+        this.imageLoaded=src;
+        this.openSideBar = true;
+      if(index>-1){
+        this.image=src;
+      }else{
+        this.image='https://ocr-angular-app.s3.us-east-2.amazonaws.com/'+src;
+      }
     });
     this.listSubscribers=[observer1$];
   }
@@ -74,7 +81,7 @@ export class SideBarComponent implements OnInit, OnDestroy{
   }
 
   getbase64Image(image){
-    this._requestsOCRImagesService.getbase64Image({image:image}).subscribe(
+    this._requestsOCRImagesService.getbase64Image(image).subscribe(
       response=>{
         this.initialization(response.image);
       },
@@ -95,8 +102,13 @@ export class SideBarComponent implements OnInit, OnDestroy{
   }
 
   loadedImage(image){
+    var index=image.indexOf('base64');
     this.initSetup();
-    this.getbase64Image(image);
+    if(index>-1){
+      this.initialization(this.imageLoaded);
+    }else{
+      this.getbase64Image(this.imageLoaded);
+    }
   }
 
   changeFunc(e){

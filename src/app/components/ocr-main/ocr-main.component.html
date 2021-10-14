@@ -32,7 +32,7 @@
       </label>
       <input
         id="uploadImg"
-        (change)="changeFunc($event)"
+        (change)="imageLoaded($event)"
         type="file"
         name="image"
       >
@@ -44,6 +44,33 @@
       >
     </div>
   </form>
+
+  <div class="savedImages" [style.display]="(localDBEmpty)? 'block':'none'">
+    <button type="button" class="btn-sync" [disabled]="!localDBEmpty" (click)="syncLocal()">Sync{{status | json}}</button>
+    <p>
+      This Images are Saved in your local Storage.
+    </p>
+    <p>
+      When your Internet connection is back push the Sync Button to save your images to the server
+    </p>
+    <ul class="list-file" >
+      <li class="item-file" *ngFor="let item of localSavedImages">
+        <div class="trash" (click)="deleteImageLocal(item)">
+          <i class="fas fa-trash-alt"></i>
+        </div>
+        <div class="block" (click)="clickImage({src:item.src})">
+          <img
+            id="imageToLoad"
+            class="input-image"
+            *ngIf="item.imageName"
+            src="{{item.src}}"
+          >
+          <p>{{item.documentName}}</p>
+          <p>{{item.documentType}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 
   <div class="savedImages">
     <p *ngIf="!startTitle">
@@ -60,9 +87,10 @@
         <div class="block" (click)="clickImage({src:item.imageName})">
           <img
             id="imageToLoad"
-            src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{item.imageName}}"
+            class="input-image"
             *ngIf="item.imageName"
-            class="input-image">
+            src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{item.imageName}}"
+          >
          <p>{{item.documentName}}</p>
          <p>{{item.documentType}}</p>
         </div>

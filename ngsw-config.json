@@ -22,11 +22,12 @@
     },
     {
       "name": "assets",
-      "installMode": "lazy",
+      "installMode": "prefetch",
       "updateMode": "prefetch",
       "resources": {
         "files": [
           "/assets/**",
+          "/fontawesome-webfont*",
           "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani|mp4)"
         ]
       }
@@ -41,6 +42,10 @@
         "https://backend-angular-apps.herokuapp.com/ocrApp/login",
         "https://backend-angular-apps.herokuapp.com/ocrApp/save-user",
         "https://backend-angular-apps.herokuapp.com/ocrApp/get-imagesdata",
+        "https://backend-angular-apps.herokuapp.com/ocrApp/getbase64Image",
+        "https://backend-angular-apps.herokuapp.com/ocrApp/save-OcrImageData",
+        "https://backend-angular-apps.herokuapp.com/ocrApp/uploadImageS3",
+
         "https://backend-angular-apps.herokuapp.com/ocrApp"
 
       ],

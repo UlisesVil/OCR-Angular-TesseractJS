@@ -14,13 +14,16 @@ import { OcrMainComponent } from './components/ocr-main/ocr-main.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { OutputTextComponent } from './components/output-text/output-text.component';
 
-import { CookieService } from 'ngx-cookie-service';
-import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.interceptor';
 import { LoadwarningsComponent } from './modals/loadwarnings/loadwarnings.component';
 import { OcrloadingComponent } from './modals/ocrloading/ocrloading.component';
+import { CookieService } from 'ngx-cookie-service';
+import { JwtInterceptorInterceptor } from  './interceptors/jwt-interceptor.interceptor';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,11 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
+    }),
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [
     CookieService,{

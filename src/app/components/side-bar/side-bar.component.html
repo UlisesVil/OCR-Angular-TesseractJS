@@ -1,7 +1,7 @@
 <div
   class="wrapper"
-  [style.height]="(openSideBar)? '90%':'0%'"
-  [style.width]="(openSideBar)? '98%':'0%'"
+  [style.height]="(openSideBar)? '97%':'0%'"
+  [style.width]="(openSideBar)? '99%':'0%'"
   [style.visibility]="(openSideBar)? 'visible':'hidden'"
 >
 
@@ -34,7 +34,7 @@
             (load)='loadedImage(image)'
             #inputImage
             class="input-image"
-            src="https://ocr-angular-app.s3.us-east-2.amazonaws.com/{{image}}"
+            src="{{image}}"
           >
         </ng-container>
       </div>
