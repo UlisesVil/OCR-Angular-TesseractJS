@@ -1,50 +1,66 @@
 <div class="wrapper">
-  <form #loginForm= "ngForm" (ngSubmit)="onSubmitlogin(loginForm)" >
-    <input
-      type="email"
-      name="email"
-      #email="ngModel"
-      [(ngModel)]="user.email"
-      placeholder="E-mail"
-      [email]="true"
-      required
-    >
-    <span class="form_error" *ngIf="email.touched && !email.valid ">
-      <strong>*Please enter a valid E-mail</strong>
-    </span>
+  <form [formGroup]="form" class="loginForm">
 
-    <input
-      type="password"
-      name="password"
-      #password="ngModel"
-      [(ngModel)]="user.password"
-      placeholder="Password"
-      required
-    >
-    <span class="form_error" *ngIf="password.touched && !password.valid ">
-      <strong>*Password is required</strong>
-    </span>
+    <div class="header">
+      <h1>Login</h1>
+      <hr>
+      <p>Log in to start</p>
+    </div>
 
-    <input
-      type="password"
-      name="passwordConfirm"
-      #passwordConfirm="ngModel"
-      [(ngModel)]="confirm"
-      placeholder="Confirm Password"
-      required
-    >
-    <span class="form_error" *ngIf="passwordConfirm.touched && !passwordConfirm.valid ">
-      <strong>*Please confirm your password</strong>
-    </span>
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="email"
+        name="email"
+        placeholder="E-mail"
+        formControlName="email"
+        [email]="true"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Please enter a valid E-mail</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
 
-    <input
-      class="submit"
-      type="submit"
-      value="Login"
-    >
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="password"
+        name="password"
+        placeholder="Password"
+        formControlName="password"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Password is required</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Please confirm your password</strong> <br>
+          <strong>Or the password does not match the Confirmed one</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <button class="submit" mat-raised-button type="submit" (click)="onSubmitlogin()">Login</button>
 
     <div class="toSignUp">
-      Still not registered? click
+      Still not Registered? click
       <span [routerLink]="['/signUp']">
         Here !!!
       </span>

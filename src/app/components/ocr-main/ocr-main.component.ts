@@ -8,6 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { DbPwaService } from 'src/app/services/db-pwa.service';
 import { ConnectionService } from 'ng-connection-service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-ocr-main',
@@ -35,9 +36,11 @@ export class OcrMainComponent implements OnInit{
   public okWarning:String;
   public errorWarning:String;
   public modal: boolean=false;
-  public localSavedImages:any;
+  public localSavedImages:any[];
+  public form: FormGroup;
 
   constructor(
+    private _formBuilder: FormBuilder,
     private _ocrService: OcrService,
     private _uploadImagesService: UploadImagesService,
     private _requestsOCRImagesService: RequestsOCRImagesService,
@@ -47,16 +50,14 @@ export class OcrMainComponent implements OnInit{
     public _snackBar: MatSnackBar
     ) {
     this.ocrImageModel= new OcrImage('','','','');
-
+    this.formCreate();
     this._connectionService.monitor().subscribe(isConnected => {
       this.isConnected=isConnected;
-
       if(this.isConnected){
         this.status="Online";
       }else{
         this.status="Offline";
       }
-
       this._snackBar.open('You are '+this.status, 'Ok', {
         duration: 3000,
         panelClass: ['black-snackbar']
@@ -71,14 +72,22 @@ export class OcrMainComponent implements OnInit{
     this._dbPwaService.getAll()
       .then((items:Array<any>)=>{
         items.forEach((res)=>{
-          if(res){
+          if(res && this.localSavedImages.length!==0){
             this.localDBEmpty=true;
+            console.log(this.localSavedImages.length);
           }else{
             this.localDBEmpty=false;
           }
         })
       })
     ;
+  }
+
+  formCreate(){
+    this.form = this._formBuilder.group({
+      documentName: ['', [Validators.required]],
+      documentType: ['', [Validators.required]],
+    });
   }
 
   getImagesData(userId){
@@ -98,18 +107,21 @@ export class OcrMainComponent implements OnInit{
       .then((items:Array<any>)=>{
         var localSavedImages=[];
         items.forEach(({doc})=>{
-          var imageName=doc.ocrImageModel.imageName;
-          var dotIndex=imageName.indexOf('.');
-          var ext=imageName.slice(dotIndex+1, imageName.length);
-          var item={
-            _id:doc._id,
-            _rev:doc._rev,
-            documentName:doc.ocrImageModel.documentName,
-            documentType:doc.ocrImageModel.documentType,
-            imageName:doc.ocrImageModel.imageName,
-            src:'data:image/'+ext+';base64,'+doc._attachments.image.data
+          var userId=doc.userId;
+          if(userId==this.loggedUser.id){
+            var imageName=doc.ocrImageModel.imageName;
+            var dotIndex=imageName.indexOf('.');
+            var ext=imageName.slice(dotIndex+1, imageName.length);
+            var item={
+              _id:doc._id,
+              _rev:doc._rev,
+              documentName:doc.ocrImageModel.documentName,
+              documentType:doc.ocrImageModel.documentType,
+              imageName:doc.ocrImageModel.imageName,
+              src:'data:image/'+ext+';base64,'+doc._attachments.image.data
+            }
+            localSavedImages.push(item);
           }
-          localSavedImages.push(item);
         });
         this.localSavedImages=localSavedImages;
       })
@@ -143,57 +155,68 @@ export class OcrMainComponent implements OnInit{
     window.scrollTo(0,0);
   }
 
-  onSubmit(form){
-    this._requestsOCRImagesService.saveOcrImages(this.ocrImageModel).subscribe(
-      response=>{
-        let data=response.data;
-        this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], this.imageObj, 'image')
-          .then((result:any)=>{
-            if(result.message){
-              this.modal=true;
-              this.okWarning=result.message;
-              setTimeout(()=>{
-                window.location.reload();
-              },3000);
-            }
-          })
-        ;
-      },
-      error=>{
-        if(<any>error){
-          console.log(<any>error);
-          this.errorWarning=<any>error.error.message;
-          this.modal=true;
-        };
-
-        var imagePrev= document.getElementById('imgPrevSave');
-        var srcComplete=imagePrev.getAttribute('src');
-        var base='base64';
-        var baseIndex=srcComplete.lastIndexOf(base)+7;
-        var imgBase64=srcComplete.slice(baseIndex, srcComplete.length);
-        var imageName=this.ocrImageModel.imageName;
-        var dotIndex=imageName.indexOf('.');
-        var ext=imageName.slice(dotIndex+1, imageName.length);
-        var imageType="image/"+ext;
-        var pendingSave={
-          ocrImageModel: this.ocrImageModel,
-          imageObj: this.imageObj,
-          _id:imageName,
-          _attachments:{
-            'image':{
-              content_type: imageType,
-              data: imgBase64
-            }
-          }
-        };
-        this._dbPwaService.holdData(pendingSave);
-        this.modal=true;
-        this.okWarning="Saved in Local When your Internet connection is back push the Sync Button to save your images to the server"
+  onSubmit(){
+    if(this.form.valid){
+      this.ocrImageModel={
+        imageName: this.ocrImageModel.imageName,
+        userId: this.ocrImageModel.userId,
+        documentName: this.form.value.documentName,
+        documentType: this.form.value.documentType
       }
-    );
-    setTimeout(()=>{
-      window.location.reload();
-    },3000);
+      this._requestsOCRImagesService.saveOcrImages(this.ocrImageModel).subscribe(
+        response=>{
+          let data=response.data;
+          this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], this.imageObj, 'image')
+            .then((result:any)=>{
+              if(result.message){
+                this.modal=true;
+                this.okWarning=result.message;
+                setTimeout(()=>{
+                  window.location.reload();
+                },3000);
+              }
+            })
+          ;
+        },
+        error=>{
+          if(<any>error){
+            console.log(<any>error);
+            this.errorWarning=<any>error.error.message;
+            this.modal=true;
+          };
+          var imagePrev= document.getElementById('imgPrevSave');
+          var srcComplete=imagePrev.getAttribute('src');
+          var base='base64';
+          var baseIndex=srcComplete.lastIndexOf(base)+7;
+          var imgBase64=srcComplete.slice(baseIndex, srcComplete.length);
+          var imageName=this.ocrImageModel.imageName;
+          var dotIndex=imageName.indexOf('.');
+          var ext=imageName.slice(dotIndex+1, imageName.length);
+          var imageType="image/"+ext;
+          var pendingSave={
+            userId:this.loggedUser.id,
+            ocrImageModel: this.ocrImageModel,
+            imageObj: this.imageObj,
+            _id:imageName,
+            _attachments:{
+              'image':{
+                content_type: imageType,
+                data: imgBase64
+              }
+            }
+          };
+          this._dbPwaService.holdData(pendingSave);
+          this.modal=true;
+          this.okWarning="Saved in Local When your Internet connection is back push the Sync Button to save your images to the server"
+        }
+      );
+      setTimeout(()=>{
+        window.location.reload();
+      },3000);
+    }else{
+      this.modal=true;
+      this.errorWarning="Please Select an image, Write a name to identify it and Write a type to describe your image"
+    }
   }
 
   imageLoaded(e:any){
@@ -232,27 +255,30 @@ export class OcrMainComponent implements OnInit{
     this._dbPwaService.getAll()
       .then((items:Array<any>)=>{
         items.forEach(({doc})=>{
-          this._requestsOCRImagesService.saveOcrImages(doc.ocrImageModel).subscribe(
-            response=>{
-              if(response){
-                this._dbPwaService.clearImgData(doc);
+          var userId=doc.userId;
+          if(userId==this.loggedUser.id){
+            this._requestsOCRImagesService.saveOcrImages(doc.ocrImageModel).subscribe(
+              response=>{
+                if(response){
+                  this._dbPwaService.clearImgData(doc);
+                }
+                let data=response.data;
+                this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], doc.imageObj, 'image')
+                  .then((result:any)=>{
+                    if(result.message){
+                      this.modal=true;
+                      this.okWarning=result.message;
+                    }
+                  })
+                ;
+              },
+              error=>{
+                console.log(<any>error);
+                this.errorWarning=<any>error.error.message;
+                this.modal=true;
               }
-              let data=response.data;
-              this._uploadImagesService.makeFileRequest(this.url+'uploadImageS3/'+data._id, [], doc.imageObj, 'image')
-                .then((result:any)=>{
-                  if(result.message){
-                    this.modal=true;
-                    this.okWarning=result.message;
-                  }
-                })
-              ;
-            },
-            error=>{
-              console.log(<any>error);
-              this.errorWarning=<any>error.error.message;
-              this.modal=true;
-            }
-          );
+            );
+          }
           setTimeout(()=>{
             window.location.reload();
           },3000);

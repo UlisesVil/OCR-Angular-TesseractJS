@@ -51,7 +51,7 @@
 
       }
 
-      label[for="uploadImg"],input[type=submit] {
+      label[for="uploadImg"],.submit {
         display: block;
         width: 100%;
         background-color: #000000;
@@ -86,11 +86,17 @@
         outline: none;
       }
 
-      input[type=submit]{
+      .form_error{
+        color: red;
+        font-size: 12px;
+        padding: 10px;
+      }
+
+      .submit{
         margin-top: 5px;
       }
 
-      input[type=submit]:hover,
+      .submit:hover,
       label[for="uploadImg"]:hover{
         background: rgba(0, 177, 247, 0.616);
         box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);

@@ -1,70 +1,102 @@
 <div class="wrapper">
-  <form #registerForm= "ngForm" (ngSubmit)="onSubmit(registerForm)" >
-    <input
-      type="text"
-      name="name"
-      #name="ngModel"
-      [(ngModel)]="user.userName"
-      placeholder="Name"
-      required
-    >
-    <span class="form_error" *ngIf="name.touched && !name.valid">
-      <strong>*Your Name is required</strong>
-    </span>
+  <form [formGroup]="form" class="registerForm">
 
-    <input
-      type="text"
-      name="lastName"
-      #lastName="ngModel"
-      [(ngModel)]="user.lastName"
-      placeholder="Last Name"
-      required
-    >
-    <span class="form_error" *ngIf="lastName.touched && !lastName.valid">
-      <strong>*Your Last Name is required</strong>
-    </span>
+    <div class="header">
+      <h1>Register</h1>
+      <hr>
+      <p>Create your account. It's free and only takes a minute.</p>
+    </div>
 
-    <input
-      type="email"
-      name="email"
-      #email="ngModel"
-      [(ngModel)]="user.email"
-      placeholder="E-mail"
-      [email]="true"
-      required
-    >
-    <span class="form_error" *ngIf="email.touched && !email.valid">
-      <strong>*Please enter a valid E-mail</strong>
-    </span>
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="text"
+        name="name"
+        placeholder="Name"
+        formControlName="name"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Your Name is required</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
 
-    <input
-      type="password"
-      name="password"
-      #password="ngModel"
-      [(ngModel)]="user.password"
-      placeholder="Password"
-      required
-    >
-    <span class="form_error" *ngIf="password.touched && !password.valid">
-      <strong>*Password is required</strong>
-    </span>
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
+        formControlName="lastName"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Your Last Name is required</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
 
-    <input
-      type="password"
-      name="passwordConfirm"
-      #passwordConfirm="ngModel"
-      [(ngModel)]="confirm"
-      placeholder="Confirm Password"
-      required
-    >
-    <span
-      class="form_error"
-      *ngIf="passwordConfirm.touched && !passwordConfirm.valid"
-    >
-      <strong>*Please confirm your password</strong>
-    </span>
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="email"
+        name="email"
+        placeholder="E-mail"
+        formControlName="email"
+        [email]="true"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Please enter a valid E-mail</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
 
-    <input class="submit" type="submit" value="Sign Up">
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="password"
+        name="password"
+        placeholder="Password"
+        formControlName="password"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Password is required</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="group">
+      <input
+        matInput
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+        required
+      >
+      <mat-error>
+        <span class="form_error">
+          <strong>*Please confirm your password</strong> <br>
+          <strong>Or the password does not match the Confirmed one</strong>
+        </span>
+      </mat-error>
+    </mat-form-field>
+
+    <button class="submit" mat-raised-button type="submit" (click)="onSubmit()">Sign Up</button>
+
+    <div class="toLogin">
+      Back to
+      <span [routerLink]="['/login']">
+        Log-in
+      </span>
+    </div>
   </form>
 </div>
 

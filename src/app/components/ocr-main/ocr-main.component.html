@@ -1,27 +1,29 @@
 <div id="wrapper" class="wrapper">
   <app-side-bar></app-side-bar>
-  <form #uploadImgForm="ngForm" (ngSubmit)="onSubmit(uploadImgForm)">
+  <form [formGroup]="form" class="UploadImageForm">
     <div id="noImage" *ngIf='!srcLoad'>
       Preview
     </div>
-    <img id="imgPrevSave" alt="">
+    <img id="imgPrevSave">
     <div class="inputCont">
       <input
+        matInput
         type="text"
         name="documentName"
-        #documentName="ngModel"
-        [(ngModel)]="ocrImageModel.documentName"
         placeholder="Document Name"
+        formControlName="documentName"
         required
       >
+
       <input
+        matInput
         type="text"
         name="documentType"
-        #documentType="ngModel"
-        [(ngModel)]="ocrImageModel.documentType"
         placeholder="Document Type"
+        formControlName="documentType"
         required
       >
+
       <label for="uploadImg">
         <div class="indicador" *ngIf="imageFileName">
           <span>{{imageFileName}}</span>
@@ -30,25 +32,22 @@
           <span>Select an Image</span>
         </div>
       </label>
+
       <input
         id="uploadImg"
         (change)="imageLoaded($event)"
         type="file"
         name="image"
       >
-      <input
-        type="submit"
-        value="Save"
-        [disabled]="!uploadImgForm.form.valid"
-        required
-      >
+
+      <button class="submit" type="submit" (click)="onSubmit()">Save</button>
     </div>
   </form>
 
   <div class="savedImages" [style.display]="(localDBEmpty)? 'block':'none'">
     <button type="button" class="btn-sync" [disabled]="!localDBEmpty" (click)="syncLocal()">Sync{{status | json}}</button>
     <p>
-      This Images are Saved in your local Storage.
+      These Images are Saved in your local Storage:
     </p>
     <p>
       When your Internet connection is back push the Sync Button to save your images to the server

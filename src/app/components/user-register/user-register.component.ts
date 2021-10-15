@@ -3,6 +3,8 @@ import { UserAuthModel } from 'src/app/models/user-auth-model';
 import { UserService } from '../../services/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PasswordValidation } from '../../utils/matchPassword';
 
 @Component({
   selector: 'app-user-register',
@@ -15,20 +17,41 @@ export class UserRegisterComponent implements OnInit {
   public errorWarning:String;
   public okWarning:String;
   public modal:boolean=false;
+  public form: FormGroup;
 
   constructor(
+    private _formBuilder: FormBuilder,
     private _userService: UserService,
     private _cookieService: CookieService,
     private _router: Router
   ) {
     this.user = new UserAuthModel("","","","");
+    this.formCreate();
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(form){
-    if(this.user.password===this.confirm){
+  formCreate(){
+    this.form = this._formBuilder.group({
+      name: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    }, {
+      validator: PasswordValidation.MatchPassword
+    });
+  }
+
+  onSubmit(){
+    if(this.form.valid){
+      this.user={
+        userName: this.form.value.name,
+        lastName: this.form.value.lastName,
+        email: this.form.value.email,
+        password: this.form.value.password
+      }
       this._userService.saveUser(this.user).subscribe(
         res=>{
           this._userService.login(this.user).subscribe(
@@ -54,9 +77,6 @@ export class UserRegisterComponent implements OnInit {
           this.modal=true;
         }
       );
-    }else{
-      this.errorWarning='The password does not match the Confirmed one';
-      this.modal=true;
     }
   }
 
