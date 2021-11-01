@@ -1,0 +1,107 @@
+.savedImages{
+  width: 100%;
+  height: fit-content;
+  border: 1px solid #036fa5;
+  border-radius: 5px;
+  padding: 20px 10px;
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.801);
+  box-sizing: border-box;
+
+  .btn-sync{
+    display: block;
+    width: 150px;
+    padding: 5px 0;
+    margin: 5px auto 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000000;
+    border: 1px solid #036fa5;
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all .5s;
+
+    &:hover{
+      background: rgba(0, 177, 247, 0.616);
+      text-shadow: 2px 2px 3px black;
+      box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+    }
+  }
+
+  p{
+    text-align: center;
+  }
+
+  .deleteWarn{
+    color: red;
+  }
+
+  .list-file{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    .item-file{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      .trash{
+        color: rgb(206, 206, 206);
+        margin-right: 10px;
+
+        &:hover{
+          color: red;
+        }
+      }
+
+      .block{
+        width: 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        margin: .1rem .5rem .5rem;
+        background-color: rgba(0, 0, 0, 0.548);
+        border-radius: 5px;
+        border: 1px solid #036fa5;
+        box-shadow: 0 10.7px 17.9px -6px rgba(0, 0, 0, 0.12),
+          0 27.7px 47.1px -6px rgba(0, 0, 0, 0.066),
+          0 101px 80px -6px rgba(0, 0, 0, 0.047)
+        ;
+
+        &:hover{
+          box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+        }
+
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          margin-bottom: 15px;
+        }
+
+        p{
+          font-size: 12px;
+          line-height: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(max-width:550px) {
+  form{
+    margin: 0 auto;
+  }
+}

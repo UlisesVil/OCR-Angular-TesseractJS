@@ -68,6 +68,12 @@
     border-radius: 5px;
     z-index: 4;
 
+    &:hover{
+      background: rgba(0, 177, 247, 0.616);
+      box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+      text-shadow: 2px 2px 3px black;
+    }
+
     .fa-bars{
       color: whitesmoke;
       font-size: 17px;
@@ -77,11 +83,5 @@
       color: whitesmoke;
       font-size: 17px;
     }
-  }
-
-  button:hover{
-    background: rgba(0, 177, 247, 0.616);
-    box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
-    text-shadow: 2px 2px 3px black;
   }
 }

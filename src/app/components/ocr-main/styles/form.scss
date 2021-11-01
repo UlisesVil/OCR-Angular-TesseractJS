@@ -1,0 +1,100 @@
+form{
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-content:flex-end;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.459);
+  box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+
+  #noImage{
+    width: 95%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    font-size: 12px;
+    text-align: center;
+    word-wrap: break-word;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background: rgb(20, 20, 20);
+    margin-top: 5px;
+    padding: 0 5px;
+  }
+
+  #imgPrevSave{
+    width:100%;
+    display: block;
+    border-radius: 5px;
+  }
+
+  .inputCont{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    input[type=file]#uploadImg {
+      position: absolute;
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    label[for="uploadImg"],.submit {
+      display: block;
+      width: 100%;
+      background-color: #000000;
+      border: 1px solid rgb(22, 110, 211);
+      padding: 5px 0;
+      margin: 15px auto 0px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all .5s;
+      overflow: hidden;
+
+      .indicador{
+        width: 150px;
+        max-width: 200px;
+        display: block;
+        overflow: hidden;
+        margin: 0px auto;
+      }
+    }
+
+    input[type=text]{
+      width: 90%;
+      background: rgba(0, 0, 0, 0);
+      color: whitesmoke;
+      margin:5px auto 0;
+      border: none;
+      border-bottom: 1px solid whitesmoke;
+      outline: none;
+    }
+
+    .form_error{
+      color: red;
+      font-size: 12px;
+      padding: 10px;
+    }
+
+    .submit{
+      margin-top: 5px;
+    }
+
+    .submit:hover,
+    label[for="uploadImg"]:hover{
+      background: rgba(0, 177, 247, 0.616);
+      box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+      text-shadow: 2px 2px 3px black;
+    }
+  }
+}

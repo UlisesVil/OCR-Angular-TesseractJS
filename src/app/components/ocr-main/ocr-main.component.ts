@@ -74,7 +74,6 @@ export class OcrMainComponent implements OnInit{
         items.forEach((res)=>{
           if(res && this.localSavedImages.length!==0){
             this.localDBEmpty=true;
-            console.log(this.localSavedImages.length);
           }else{
             this.localDBEmpty=false;
           }

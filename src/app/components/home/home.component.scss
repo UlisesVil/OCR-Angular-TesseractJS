@@ -24,6 +24,13 @@
       padding: 20px 0;
       cursor: pointer;
 
+      &:hover{
+        background-color: rgba(0, 0, 0, 0.733);
+        transform: scale(1.1);
+        transition: all ease-in-out 1s;
+        box-shadow: 0 0px 30px rgba(0, 177, 247, 0.616);
+      }
+
       .fa-file-alt{
         font-size: 50px;
         margin-bottom: 10px;
@@ -53,15 +60,6 @@
           font-size: 12px;
         }
       }
-    }
-
-    .column1:hover, .column2:hover{
-      background-color: rgba(0, 0, 0, 0.733);
-      transform: scale(1.1);
-      transition: all ease-in-out 1s;
-      box-shadow:
-        0 0px 30px rgba(0, 177, 247, 0.616)
-      ;
     }
   }
 
