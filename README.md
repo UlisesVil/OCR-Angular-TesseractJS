@@ -1,5 +1,5 @@
-# OCR-Angular-TesseractJS
-# Optical Character Recognition - Progressive Web App in Angular
+# OCR Angular PWA TesseractJS
+## Optical Character Recognition - Angular Progressive Web App
 
 This Progressive Web App (PWA) is fully Responsive and is available on the web, built-in Angular on the Frontend, and communicates with a Node JS REST-API, deployed on Heroku on the backend.
 
